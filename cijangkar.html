@@ -1,0 +1,2768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AvianCare PRO · Veterinary & Poultry Management System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#f8fafc; --glass:rgba(255,255,255,.92); --border:#e2e8f0; --text:#0f172a; --muted:#64748b; --soft:#f1f5f9;
+  --g5:#22c55e; --g6:#16a34a; --g7:#15803d; --s5:#0ea5e9; --s6:#0284c7; --s7:#0369a1;
+  --r5:#f43f5e; --r6:#e11d48; --a5:#f59e0b; --a6:#d97706;
+  --g-soft:rgba(34,197,94,.14); --s-soft:rgba(14,165,233,.14); --r-soft:rgba(244,63,94,.13); --a-soft:rgba(245,158,11,.16);
+  --shadow:0 4px 24px rgba(15,23,42,.06);
+  --dash-grad-0: radial-gradient(800px 420px at 8% -5%,rgba(34,197,94,.13),transparent),radial-gradient(700px 400px at 100% 0%,rgba(14,165,233,.12),transparent);
+  --dash-grad-1: radial-gradient(800px 420px at 8% -5%,rgba(22,163,74,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(21,128,61,.1),transparent);
+  --dash-grad-2: radial-gradient(800px 420px at 8% -5%,rgba(2,132,199,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(3,105,161,.1),transparent);
+  --dash-grad-3: radial-gradient(800px 420px at 8% -5%,rgba(124,58,237,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(109,40,217,.1),transparent);
+  --dash-grad-4: radial-gradient(800px 420px at 8% -5%,rgba(217,119,6,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(180,83,9,.1),transparent);
+  --dash-grad-5: radial-gradient(800px 420px at 8% -5%,rgba(79,70,229,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(67,56,202,.1),transparent);
+  --dash-grad-6: radial-gradient(800px 420px at 8% -5%,rgba(219,39,119,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(190,24,93,.1),transparent);
+  --dash-grad-7: radial-gradient(800px 420px at 8% -5%,rgba(13,148,136,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(15,118,110,.1),transparent);
+  --dash-grad-8: radial-gradient(800px 420px at 8% -5%,rgba(234,88,12,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(194,65,12,.1),transparent);
+  --dash-grad-9: radial-gradient(800px 420px at 8% -5%,rgba(37,99,235,.15),transparent),radial-gradient(700px 400px at 100% 0%,rgba(29,78,216,.1),transparent);
+}
+html.dark{
+  --bg:#0f172a; --glass:rgba(15,23,42,.88); --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --soft:rgba(51,65,85,.4);
+  --shadow:0 4px 24px rgba(0,0,0,.35);
+  --dash-grad-0: radial-gradient(800px 420px at 8% -5%,rgba(34,197,94,.08),transparent),radial-gradient(700px 400px at 100% 0%,rgba(14,165,233,.08),transparent);
+  --dash-grad-1: radial-gradient(800px 420px at 8% -5%,rgba(22,163,74,.1),transparent);
+  --dash-grad-2: radial-gradient(800px 420px at 8% -5%,rgba(2,132,199,.1),transparent);
+  --dash-grad-3: radial-gradient(800px 420px at 8% -5%,rgba(124,58,237,.1),transparent);
+  --dash-grad-4: radial-gradient(800px 420px at 8% -5%,rgba(217,119,6,.1),transparent);
+  --dash-grad-5: radial-gradient(800px 420px at 8% -5%,rgba(79,70,229,.1),transparent);
+  --dash-grad-6: radial-gradient(800px 420px at 8% -5%,rgba(219,39,119,.1),transparent);
+  --dash-grad-7: radial-gradient(800px 420px at 8% -5%,rgba(13,148,136,.1),transparent);
+  --dash-grad-8: radial-gradient(800px 420px at 8% -5%,rgba(234,88,12,.1),transparent);
+  --dash-grad-9: radial-gradient(800px 420px at 8% -5%,rgba(37,99,235,.1),transparent);
+}
+*{box-sizing:border-box;margin:0}
+html{color-scheme:light; height:100%; overflow-y:auto;}
+html.dark{color-scheme:dark}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;
+  background-image:var(--dash-grad-0);background-attachment:fixed;transition:background-image 0.4s ease;}
+button{font:inherit}
+.hdr{position:sticky;top:0;z-index:30;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:10px 22px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:11px;margin-right:auto}
+.logo .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--g5),var(--s5));display:grid;place-items:center;color:#fff;font-size:18px}
+.logo b{font-size:17px;font-weight:800;letter-spacing:-.2px;display:block;line-height:1.2}
+.logo small{color:var(--muted);font-size:11.5px}
+.sel,.inp{font:inherit;font-size:13.5px;padding:8px 11px;border:1px solid var(--border);border-radius:12px;background:var(--glass);color:var(--text);width:100%;transition:all 0.2s ease;}
+.hdr .sel{width:auto}
+.sel{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:32px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2364748b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.sel:hover,.inp:hover{border-color:var(--g5)}
+.sel:focus,.inp:focus,textarea.inp:focus{outline:none;border-color:var(--g6);box-shadow:0 0 0 3px rgba(34,197,94,0.15);}
+html.dark .sel:focus,html.dark .inp:focus,html.dark textarea.inp:focus{box-shadow:0 0 0 3px rgba(34,197,94,0.25);}
+option{background:var(--bg);color:var(--text)}
+
+/* House Selector Compact Button */
+.dd{position:relative}
+.house-card-btn {
+  border-radius: 16px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  width: auto;
+  min-width: 240px;
+  max-width: 400px;
+  text-align: left;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  position: relative;
+  color: #fff;
+  border: none;
+}
+.house-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.house-card-btn .h-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.house-card-btn .h-info b {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+.house-card-btn .h-age {
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 6px 12px;
+  text-align: right;
+  margin-left: auto;
+}
+.house-card-btn .h-age b {
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+  display: block;
+  line-height: 1.1;
+}
+
+/* Themes per House */
+.h-theme-all { background: linear-gradient(135deg, #059669, #0284c7); }
+.h-theme-1 { background: linear-gradient(135deg, #16a34a, #15803d); }
+.h-theme-2 { background: linear-gradient(135deg, #0284c7, #0369a1); }
+.h-theme-3 { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.h-theme-4 { background: linear-gradient(135deg, #d97706, #b45309); }
+.h-theme-5 { background: linear-gradient(135deg, #4f46e5, #4338ca); }
+.h-theme-6 { background: linear-gradient(135deg, #db2777, #be185d); }
+.h-theme-7 { background: linear-gradient(135deg, #0d9488, #0f766e); }
+.h-theme-8 { background: linear-gradient(135deg, #ea580c, #c2410c); }
+.h-theme-9 { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+/* Stock Market Style Trend Badges */
+.trend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.trend-pill.up-good { background: rgba(34, 197, 94, 0.16); color: #15803d; }
+.trend-pill.up-bad { background: rgba(244, 63, 94, 0.16); color: #e11d48; }
+.trend-pill.down-good { background: rgba(34, 197, 94, 0.16); color: #15803d; }
+.trend-pill.down-bad { background: rgba(244, 63, 94, 0.16); color: #e11d48; }
+html.dark .trend-pill.down-good, html.dark .trend-pill.up-good { color: #86efac; }
+html.dark .trend-pill.down-bad, html.dark .trend-pill.up-bad { color: #fda4af; }
+
+/* Dashboard Top Bar Alignment */
+.dash-top-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg,rgba(34,197,94,.12),rgba(14,165,233,.12));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 20px;
+  backdrop-filter: blur(8px);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.date-badge .icon-box {
+  width: 44px; height: 44px; border-radius: 14px; background: var(--g5); color: #fff; display: grid; place-items: center; font-size: 18px;
+}
+.date-badge .dt-info { display: flex; flex-direction: column; justify-content: center;}
+.date-badge .dt-day { font-size: 14.5px; font-weight: 800; line-height: 1.2; }
+.date-badge .dt-sub { font-size: 12.5px; color: var(--muted); font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 2px;}
+
+/* Checkbox Filter Styling */
+.cb-group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: var(--glass); padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border); }
+.cb-lbl { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; cursor: pointer; user-select: none; color: var(--text); }
+.cb-lbl input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-color: var(--g6); border-radius: 4px; }
+.cb-lbl:hover { color: var(--g6); }
+
+.dd-menu{position:absolute;left:0;top:calc(100% + 8px);z-index:40;width:min(340px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:10px;box-shadow:0 18px 50px rgba(2,8,23,.28)}
+.dd-menu[hidden]{display:none}
+.dd-all{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text);font-weight:700;cursor:pointer;margin-bottom:8px;text-align:left}
+.dd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dd-item{border:1px solid var(--border);background:transparent;color:var(--text);border-radius:12px;padding:8px 6px;cursor:pointer;text-align:center;line-height:1.25}
+.dd-item b{display:block;font-size:13px}.dd-item small{color:var(--muted);font-size:11px}
+.dd-all:hover,.dd-item:hover{background:var(--soft);border-color:var(--g5)}
+.dd-all.on,.dd-item.on{background:var(--g6);border-color:var(--g6);color:#fff}
+.dd-item.on small{color:rgba(255,255,255,.85)}
+
+.seg{display:flex;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--soft)}
+.seg button{border:0;background:transparent;color:var(--muted);padding:7px 11px;font-weight:700;font-size:12.5px;cursor:pointer;transition:all 0.2s ease;}
+.seg button.on{background:var(--g6);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,0.3)}
+.btn{border:1px solid var(--border);background:var(--glass);color:var(--text);padding:8px 15px;border-radius:12px;font-weight:600;font-size:13.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:all 0.2s ease;}
+.btn:hover{border-color:var(--g5);box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.btn.g{background:var(--g6);border-color:var(--g6);color:#fff}.btn.g:hover{background:var(--g7)}
+.btn.s{background:var(--s6);border-color:var(--s6);color:#fff}.btn.s:hover{background:var(--s7)}
+.btn.r{color:var(--r6)}
+.btn.sm{padding:5px 10px;font-size:12.5px;border-radius:9px}
+.ic{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:6px 8px;border-radius:8px;font-size:13px;transition:all 0.15s ease}
+.ic:hover{background:var(--soft);color:var(--text)}.ic.del:hover{color:var(--r6);background:rgba(225,29,72,0.1)}
+.avatar{display:flex;align-items:center;gap:9px;cursor:pointer;border:0;background:transparent;color:var(--text);padding:3px 6px;border-radius:12px;text-align:left}
+.avatar:hover{background:var(--soft)}
+.avatar i{width:36px;height:36px;border-radius:50%;background:var(--s6);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
+.avatar span{font-weight:700;font-size:13px;line-height:1.2}.avatar small{display:block;color:var(--muted);font-weight:500;font-size:11.5px}
+
+/* Layout & Overflow Fixes */
+.layout{display:grid;grid-template-columns:68px minmax(0,1fr);min-height:calc(100vh - 62px);position:relative}
+.rail{position:sticky;top:62px;height:calc(100vh - 62px);overflow-y:auto;overflow-x:visible;border-right:1px solid var(--border);padding:14px 8px;padding-left:max(8px,env(safe-area-inset-left));background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:20}
+.nav{display:flex;flex-direction:column;gap:8px;align-items:center}
+.nav button{position:relative;width:48px;height:48px;border:0;border-radius:14px;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer;font-size:18px;transition:all 0.2s ease}
+.nav button:hover{background:var(--soft);color:var(--text)}
+.nav button.on{background:var(--g-soft);color:var(--g6);box-shadow:inset 0 0 0 1.5px var(--g5)}
+html.dark .nav button.on{color:#86efac}
+.nav button::after{content:attr(data-tip);position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);background:var(--text);color:var(--bg);padding:4px 10px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s}
+.nav button:hover::after,.nav button:focus-visible::after{opacity:1}
+.badge{position:absolute;top:1px;right:1px;background:var(--r6);color:#fff;border-radius:99px;font-size:10.5px;line-height:17px;padding:0 5px;font-weight:700;min-width:17px;text-align:center}
+
+main{padding:24px clamp(16px,3vw,34px) 120px;min-width:0;overflow-y:visible;}
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.ph h1{font-size:23px;font-weight:800;letter-spacing:-.4px;line-height:1.2}
+.ph p{color:var(--muted);margin-top:2px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--shadow);overflow:hidden;}
+.card h2{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2 i{color:var(--muted);font-size:13px}
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-bottom:16px}
+.kpi{display:flex;gap:13px;align-items:flex-start;position:relative}
+.kpi .ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:18px;flex:none}
+.kpi .l{color:var(--muted);font-size:12.5px;font-weight:600}
+.kpi .n{font-size:25px;font-weight:800;letter-spacing:-.5px;line-height:1.2;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
+.kpi .edit{position:absolute;right:10px;top:10px}
+.c-g{background:var(--g-soft);color:var(--g6)}.c-s{background:var(--s-soft);color:var(--s6)}.c-r{background:var(--r-soft);color:var(--r6)}.c-a{background:var(--a-soft);color:var(--a6)}.c-p{background:rgba(124,58,237,.14);color:#7c3aed}
+.two{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}.eq{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.chart{position:relative;height:clamp(240px,38vh,340px);width:100%;}
+
+/* Diagnostic Cards Grid */
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.diag-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+.diag-card .dc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.diag-card .dc-title {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+}
+.diag-card .dc-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: 13px;
+  margin-top: 4px;
+}
+.diag-card .dc-val {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--s6);
+}
+.diag-card .dc-meta {
+  font-size: 11.5px;
+  color: var(--muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 6px;
+  margin-top: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Alert Banner Styling */
+.alert{display:flex;gap:14px;align-items:center;background:var(--a-soft);border:1px solid var(--a5);border-radius:16px;padding:16px 52px 16px 18px;margin-bottom:16px;flex-wrap:wrap;position:relative}
+.alert>i{color:var(--a6);font-size:22px}
+.alert .tx{flex:1;min-width:220px}
+.alert .tx b{display:block;margin-bottom:4px;font-size:14.5px;}
+.alert ul{list-style:none;padding:0;color:var(--muted);font-size:13px}
+.close-alert {
+  position: absolute; top: 12px; right: 12px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 18px; padding: 6px; border-radius: 8px; transition: all 0.15s ease;
+}
+.close-alert:hover { color: var(--r6); background: rgba(244,63,94,0.12); }
+
+.tw{overflow-x:auto;margin:0 -4px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;padding:9px 11px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px 11px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.p-g{background:var(--g-soft);color:var(--g7)}.p-s{background:var(--s-soft);color:var(--s7)}.p-r{background:var(--r-soft);color:var(--r6)}.p-a{background:var(--a-soft);color:var(--a6)}.p-x{background:var(--soft);color:var(--muted)}
+html.dark .p-g{color:#86efac}html.dark .p-s{color:#7dd3fc}
+.muted{color:var(--muted)}.small{font-size:12.5px}
+.empty{text-align:center;color:var(--muted);padding:30px 10px}
+.li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}.li:last-child{border-bottom:0}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px}.chips .pill{white-space:normal}.row>*{max-width:100%}.row .sel{min-width:0}
+.mx th,.mx td{border:1px solid var(--border);padding:7px 8px;font-size:12.5px;vertical-align:top;min-width:128px}
+.mx th.h,.mx td.h{min-width:84px;font-weight:700;background:var(--soft);position:sticky;left:0}
+.mx th.today,.mx td.today{background:var(--g-soft)}
+.mx .dt{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.mx .dr{display:block;padding:3px 0;border-bottom:1px dashed var(--border)}.mx .dr:last-child{border-bottom:0}
+.mx .dr b{font-weight:600}.mx .dr em{font-style:normal;color:var(--muted);display:block;font-size:11.5px}
+.calc textarea{min-height:110px;resize:vertical}
+.res{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.res div{background:var(--soft);border-radius:12px;padding:10px 12px}
+.res small{color:var(--muted);font-size:11.5px;font-weight:600;display:block}
+.res b{font-size:20px;font-variant-numeric:tabular-nums}
+.ov{position:fixed;inset:0;background:rgba(2,8,23,.55);z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}
+.md{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:18px;width:min(720px,100%);max-height:85vh;overflow-y:auto;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.md h3{font-size:18px;font-weight:800;margin-bottom:14px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fg .full{grid-column:1/-1}
+.fl{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:700}
+.fl .inp{font-weight:400}
+textarea.inp{resize:vertical;min-height:70px}
+.acts{display:flex;justify-content:flex-end;gap:9px;margin-top:16px}
+.err{color:var(--r6);font-size:12.5px;margin-top:8px}
+.ed{position:fixed;inset:0;z-index:60;background:var(--bg);overflow:auto;padding:18px 22px 40px}
+.ed .bar{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px;position:sticky;top:0;background:var(--bg);padding:6px 0 12px;z-index:5;border-bottom:1px solid var(--border)}
+.slot{display:grid;gap:3px;padding:5px 0;border-bottom:1px dashed var(--border)}.slot:last-child{border-bottom:0}
+.slot .inp{padding:4px 7px;font-size:12px;border-radius:8px}
+
+.toast{position:fixed;bottom:max(36px, env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;border:1px solid rgba(255,255,255,0.15);padding:12px 22px;border-radius:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:99999;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 10px 30px rgba(0,0,0,0.4);width:max-content;max-width:92vw;flex-wrap:wrap;}
+.toast.show{opacity:1;pointer-events:auto}
+.toast-undo{background:var(--g6);color:#fff;border:0;padding:6px 14px;border-radius:10px;font-weight:800;cursor:pointer;font-size:13px;white-space:nowrap;}
+
+.cert{background:#fff;color:#0f172a;border:1px solid var(--border);border-radius:16px;padding:40px 46px;max-width:900px;margin:0 auto}
+.cert h1{font-size:22px;font-weight:800;text-align:center;letter-spacing:-.3px}
+.cert .sub{text-align:center;color:#475569;margin-bottom:22px}
+.cert table th,.cert table td{border:1px solid #cbd5e1;font-size:12.5px;color:#0f172a}
+.cert th{background:#f1f5f9;color:#334155}
+.cert .meta{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;margin-bottom:18px;font-size:13px}
+.cert h4{font-size:13px;margin:18px 0 6px;color:#15803d}
+.cert .sum{border:1px dashed #cbd5e1;border-radius:10px;padding:12px;min-height:90px;white-space:pre-wrap;font-size:13px}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:56px;text-align:center;font-size:13px}
+.sign div{border-top:1px solid #0f172a;padding-top:6px}
+
+/* Seg Pill Style */
+.seg.pill-style { border-radius: 99px; padding: 2px; background: var(--soft); border: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+.seg.pill-style button { border-radius: 99px; padding: 6px 14px; color: var(--muted); font-size: 11.5px; }
+.seg.pill-style button.on { background: var(--glass); color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+html.dark .seg.pill-style button.on { background: var(--g6); color: #fff; }
+
+/* Dosage Calculator Collapsible */
+.calc-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 16px; background: var(--soft); border-radius: 14px; transition: background 0.2s ease; user-select: none; }
+.calc-header:hover { background: var(--border); }
+.calc-body { display: none; padding-top: 16px; border-top: 1px dashed var(--border); margin-top: 10px; }
+.calc-body.show { display: block; }
+
+/* Image Upload & Preview */
+.img-preview { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; }
+.img-wrap { position: relative; display: inline-block; }
+.img-rm { position: absolute; top: -6px; right: -6px; background: var(--r6); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 10px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.img-rm:hover { background: #be185d; }
+
+@media (max-width:1000px){.two{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:720px){
+  .layout{grid-template-columns:56px minmax(0,1fr)}
+  .rail{padding:10px 6px;padding-left:max(6px,env(safe-area-inset-left))}
+  .nav button{width:42px;height:42px;font-size:16px}
+  .nav button::after{display:none}
+  .hdr{padding:8px 12px;gap:6px;flex-wrap:nowrap}
+  .logo{min-width:0}.logo b{font-size:15px;white-space:nowrap}.seg button{padding:6px 8px}.btn{padding:8px 11px}.hdr .btn{flex:none}
+  .logo .mark{width:34px;height:34px;font-size:15px}.logo small,.avatar span,.qt{display:none}
+  main{padding:16px 12px 80px}
+  .ph h1{font-size:20px}
+  .fg{grid-template-columns:1fr}
+  .res{grid-template-columns:1fr 1fr}
+  .kpi .n{font-size:22px}
+  .cert{padding:22px 16px}.cert .meta{grid-template-columns:1fr}.sign{gap:20px}
+  .ed{padding:12px}
+  .dash-top-bar { flex-wrap: wrap; gap: 12px; align-items: stretch; margin-bottom: 16px; }
+  .date-badge { margin-left: 0; width: 100%; padding: 12px 16px; }
+  .date-badge .icon-box { width: 38px; height: 38px; font-size: 15px; }
+  .date-badge .dt-day { font-size: 13.5px; }
+  .date-badge .dt-sub { font-size: 11.5px; }
+  .house-card-btn { min-width: 0; width: 100%; padding: 12px 16px; gap: 10px; }
+  .house-card-btn .h-info b { font-size: 16px; }
+  .house-card-btn .h-age b { font-size: 15px; }
+  .alert { padding: 14px 44px 14px 14px; }
+  .alert>i { font-size: 18px; }
+}
+@media print{
+  body{background:#fff!important;color:#000}
+  .hdr,.rail,.noprint,.toast,.ov,.ed{display:none!important}
+  .layout{display:block}
+  main{padding:0}
+  .card{box-shadow:none;backdrop-filter:none;background:#fff;border-color:#cbd5e1;color:#000}
+  .cert{border:0;padding:0;max-width:none}
+  .mx th.h,.mx td.h{position:static}
+  @page{margin:12mm}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo"><div class="mark"><i class="fa-solid fa-feather-pointed"></i></div><div><b>AvianCare PRO</b><small id="subt"></small></div></div>
+  <div class="seg" role="group" aria-label="Language"><button data-lang="id">ID</button><button data-lang="en">EN</button></div>
+  <button class="btn" id="dark" aria-label="Dark mode"><i class="fa-solid fa-moon"></i></button>
+  <button class="btn g" id="quick"></button>
+  <button class="avatar" id="prof" aria-label="Profile"></button>
+</header>
+<div class="layout">
+  <aside class="rail"><nav class="nav" id="nav" aria-label="Menu"></nav></aside>
+  <main id="main"></main>
+</div>
+<div id="modal"></div><div id="editor"></div><div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ================= helpers ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);
+const iso=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10)};
+const today=()=>iso(new Date());
+const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return iso(d)};
+const diffDays=(a,b)=>Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/864e5);
+const mondayOf=s=>{const d=new Date(s+'T00:00:00');return addDays(s,-((d.getDay()+6)%7))};
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const sum=(a,f=x=>x)=>a.reduce((t,x)=>t+f(x),0);
+
+// Basic image compression returning a Base64 string
+async function compressImage(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const max = 600; // Dikurangi jadi 600 supaya tidak terlalu memakan localStorage saat diunggah banyak
+        let w = img.width, h = img.height;
+        if (w > max || h > max) {
+          if (w > h) { h = Math.round(h * (max / w)); w = max; }
+          else { w = Math.round(w * (max / h)); h = max; }
+        }
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.6));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ================= i18n ================= */
+const L={
+sub:['Sistem Manajemen Dokter Hewan & Peternakan Unggas','Veterinary & Poultry Management System'],
+allH:['Semua Kandang (1 - 9)','All Houses (1 - 9)'],house:['Kandang','House'],quick:['Entry Dokter','Vet Entry'],
+dash:['Dashboard Performa','Performance Dashboard'],prodinput:['Input Produksi Harian','Daily Production Input'],samples:['Monitoring Sampel & Diagnostik','Sample & Diagnostic Monitoring'],schedule:['Jadwal Obat Mingguan','Weekly Drug Schedule'],
+necropsy:['Patologi & Nekropsi','Pathology & Necroscopy'],bw:['Body Weight Monitoring','Body Weight Monitoring'],mortality:['Catatan Mortalitas','Mortality Log'],report:['Laporan Audit Vet','Vet Audit Report'],
+refmod:['Production Reference Module','Production Reference Module'],
+scopeLbl:['Cakupan aktif','Active scope'],pop:['Populasi','Population'],henday:['Hen-Day','Hen-Day'],status:['Status','Status'],optimal:['OPTIMAL','OPTIMAL'],attention:['PERHATIAN','ATTENTION'],
+alertT:['Pengambilan sampel segera dilakukan','Sample collection due soon'],alertBtn:['Buka Monitoring Sampel','Open Sample Monitoring'],today:['hari ini','today'],overdue:['terlambat','overdue'],
+kPop:['Total Populasi Hidup','Total Live Flock Population'],kEgg:['Produksi Telur (Hen-Day)','Egg Production (Hen-Day)'],kMort:['Rata-rata Mortalitas Harian','Daily Average Mortality'],kBW:['Bobot Badan Betina (♀) & Weekly Gain','Avg Female Body Weight & Weekly Gain'],kSex:['Sex Ratio (Jantan : Betina)','Sex Ratio (Male : Female)'],
+target:['Target','Target'],limit:['Batas normal','Normal limit'],unif:['Uniformity','Uniformity'],cv:['CV','CV'],birds:['ekor','birds'],
+chartA:['Produksi Telur vs Mortalitas','Egg Production vs Mortality'],chartB:['Akumulasi Penyebab Mortalitas & Necropsy','Accumulated Mortality & Necropsy Causes'],chartC:['Rata-rata OPG Berdasarkan Umur','Average OPG by Flock Age'],
+medToday:['Obat & Vitamin Aktif Hari Ini','Active Medication & Vitamins Today'],labUp:['Tugas Sampling Lab Mendatang','Upcoming Laboratory Sampling Tasks'],none:['Tidak ada','None'],noData:['Belum ada data','No data yet'],
+noMatrixToday:['Tidak ada matriks jadwal yang mencakup hari ini.','No schedule matrix covers today.'],
+sTitle:['Monitoring Sampel & Diagnostic Monitoring','Sample & Diagnostic Monitoring'],
+sSub:['Jadwal sampling, OPG monitoring, dan hasil serologi multi-antigen.','Sampling schedule, OPG monitoring, and multi-antigen serology results.'],
+addS:['Tambah Jadwal Sampling','Add Sampling Schedule'],
+trend:['Tren Hasil Diagnostik','Diagnostic Results Trend'],date:['Tanggal','Date'],type:['Jenis Sampel','Sample Type'],qty:['Jumlah','Qty'],purpose:['Tujuan Uji','Purpose'],result:['Ringkasan Hasil Lab','Lab Result Summary'],actions:['Aksi','Actions'],
+t_feces:['Feces','Feces'],t_serum:['Blood/Serum','Blood/Serum'],t_swab:['Swab','Swab'],t_tissue:['Jaringan','Tissue'],t_env:['Lingkungan','Environmental'],
+st_pending:['Belum Dikoleksi','Not Collected'],st_collected:['Sampel Sudah Dikoleksi','Collected'],st_testing:['Sedang Diuji','Testing'],st_done:['Selesai (Hasil Ada)','Completed'],
+inRes:['Input Hasil','Input Result'],edit:['Edit','Edit'],del:['Hapus','Delete'],value:['Nilai / Rata-rata','Value / Mean'],unit:['Satuan','Unit'],findings:['Temuan / Catatan','Findings / Notes'],
+matrixSel:['Matriks jadwal tersimpan','Saved schedule matrices'],editThis:['Edit Jadwal Ini','Edit This Schedule'],newMx:['Buat Matriks Tabel Baru','Create New Matrix'],print:['Cetak / Unduh Tabel','Print / Download Table'],delMx:['Hapus Matriks','Delete Matrix'],
+days:[['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'],['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']],
+mxTitle:['Judul Matriks','Matrix Title'],mxStart:['Tanggal Senin Awal','Starting Monday Date'],catalog:['Katalog Obat','Drug Catalog'],saveLock:['Simpan & Kunci Jadwal','Save & Lock Schedule'],cancel:['Batal','Cancel'],save:['Simpan','Save'],
+custom:['Obat lain (ketik)','Custom drug (type)'],dose:['Dosis','Dosage'],pick:['— Katalog —','— Catalog —'],addDrug:['Tambah Obat','Add Drug'],drugName:['Nama obat','Drug name'],close:['Tutup','Close'],
+mxHint:['Tiap slot: Pilih obat dari katalog menggunakan dropdown. Jika obat belum ada, klik tombol "Katalog Obat" di atas tabel untuk menambahkan. Tanggal akan disesuaikan ke hari Senin.','Each slot: Pick a drug from the dropdown catalog. To add new ones, use the "Drug Catalog" button above. The date is snapped to Monday.'],
+nSub:['Temuan nekropsi, lesi organ, dan diagnosis sementara.','Necropsy findings, organ lesions and tentative diagnoses.'],dateAge:['Tanggal / Umur','Date / Age'],exam:['Jml Diperiksa','Birds Examined'],lesions:['Lesi Organ (Gross)','Gross Organ Lesions'],system:['Sistem Terdampak','System Impacted'],dx:['Diagnosis Sementara','Tentative Diagnosis'],reco:['Rekomendasi Dokter','Veterinary Recommendation'],searchN:['Cari lesi atau diagnosis…','Search lesion or diagnosis…'],addN:['Tambah Nekropsi','Add Necropsy'],age:['Umur (minggu)','Age (weeks)'],wk:['mgg','wk'],
+sy_resp:['Respirasi','Respiratory'],sy_gi:['Pencernaan (GI)','Gastrointestinal'],sy_cardio:['Kardiovaskular','Cardiovascular'],sy_nerv:['Saraf','Nervous'],sy_msk:['Muskuloskeletal','Musculoskeletal'],
+bSub:['Hitung uniformity dari bobot individu dan catat bobot mingguan.','Calculate uniformity from individual weights and log weekly weights.'],calcT:['Kalkulator Uniformity Cepat','Quick Uniformity Calculator'],paste:['Tempel bobot individu (gram), pisahkan dengan spasi, koma, atau baris baru','Paste individual weights (g), separated by space, comma or new line'],calc:['Hitung','Calculate'],cnt:['Jumlah Sampel','Sample Count'],mean:['Rata-rata (g)','Mean (g)'],unifBand:['Uniformity (±10%)','Uniformity (±10%)'],toLog:['Simpan ke Log','Save to Log'],logT:['Log Bobot Badan Mingguan (♀)','Weekly Female Body Weight Log'],addB:['Tambah Log BB','Add BW Log'],tgt:['Standar (g)','Target (g)'],dev:['Selisih','Dev.'],nS:['Sampel (n)','Sample (n)'],badW:['Masukkan minimal satu bobot yang valid.','Enter at least one valid weight.'],
+mSub:['Kematian alami dan afkir harian per kandang.','Daily natural deaths and culls per house.'],nat:['Mati Alami','Natural Deaths'],cull:['Afkir (Culls)','Culls'],tot:['Total Mati','Total Dead'],cause:['Dugaan Penyebab','Suspected Cause'],addM:['Tambah Catatan','Add Record'],
+c_sudden:['Mati mendadak','Sudden death'],c_disease:['Dugaan penyakit','Suspected disease'],c_prolapse:['Prolaps','Prolapse'],c_trauma:['Trauma / kanibalisme','Trauma / cannibalism'],c_heat:['Heat stress','Heat stress'],c_peritonitis:['Peritonitis telur','Egg peritonitis'],c_unknown:['Tidak diketahui','Unknown'],c_weak:['Afkir (lemah)','Cull (weak)'],
+rTitle:['Laporan Audit Kesehatan Veteriner','Veterinary Health Audit Report'],rSub:['Sertifikat ringkasan kesehatan flok','Flock health summary certificate'],auditDate:['Tanggal audit','Audit date'],farm:['Peternakan','Farm'],vet:['Dokter hewan','Veterinarian'],reg:['No. registrasi','Registration no.'],scopeR:['Cakupan','Scope'],
+rHouse:['Kandang','House'],rMort:['Mort. 7 hr (rata²/hari)','Mort. 7d (avg/day)'],rNec:['Nekropsi 30 hr','Necropsy 30d'],rPend:['Sampel tertunda','Pending samples'],clin:['Ringkasan Klinis','Clinical Summary'],regen:['Buat Ulang Ringkasan','Regenerate Summary'],printR:['Cetak / Simpan PDF','Print / Save PDF'],signM:['Manajer Farm','Farm Manager'],signV:['Dokter Hewan / Patolog','Attending Veterinarian / Pathologist'],editHint:['Klik ringkasan untuk mengedit.','Click the summary to edit it.'],
+pName:['Nama dokter hewan','Veterinarian name'],pReg:['No. registrasi','Registration no.'],pFarm:['Nama peternakan','Farm name'],popEdit:['Populasi per Kandang','Population per House'],backup:['Unduh Cadangan','Download Backup'],restore:['Pulihkan dari Cadangan','Restore from Backup'],resetD:['Muat Data Contoh','Load Sample Data'],clearD:['Hapus Semua Data','Erase All Data'],profT:['Profil & Data','Profile & Data'],
+req:['wajib diisi','is required'],saved:['Tersimpan','Saved'],deleted:['Dihapus','Deleted'],badFile:['Bukan file cadangan AvianCare.','Not an AvianCare backup file.'],quickT:['Entry Dokter','Vet Entry'],quickS:['Pilih jenis catatan:','Choose a record type:'],
+sumTpl:[
+ (o)=>`Audit ${o.date} untuk ${o.scope}. Populasi hidup ${o.pop} ekor, Hen-Day ${o.hd}, rata-rata mortalitas harian ${o.mort} (7 hari terakhir). Bobot badan rata-rata ${o.bw} dengan uniformity ${o.un}. ${o.necN} kasus nekropsi dalam 30 hari terakhir${o.dx?`, diagnosis tersering: ${o.dx}`:''}. Sampel laboratorium tertunda: ${o.pend}.`,
+ (o)=>`Audit of ${o.date} for ${o.scope}. Live population ${o.pop} birds, Hen-Day ${o.hd}, average daily mortality ${o.mort} (last 7 days). Mean body weight ${o.bw} with uniformity ${o.un}. ${o.necN} necropsy case(s) in the last 30 days${o.dx?`, most frequent diagnosis: ${o.dx}`:''}. Laboratory samples pending: ${o.pend}.`]
+};
+const t=k=>{const v=L[k];return v?v[ui.lang==='id'?0:1]:k};
+const loc=()=>ui.lang==='id'?'id-ID':'en-GB';
+const n0=v=>Number(v).toLocaleString(loc(),{maximumFractionDigits:0});
+const nd=(v,d=1)=>Number(v).toLocaleString(loc(),{minimumFractionDigits:d,maximumFractionDigits:d});
+const fD=s=>s?new Date(s+'T00:00:00').toLocaleDateString(loc(),{day:'numeric',month:'short',year:'numeric'}):'—';
+const fS=s=>new Date(s+'T00:00:00').toLocaleDateString(loc(),{day:'numeric',month:'short'});
+const dayName=i=>L.days[ui.lang==='id'?0:1][i];
+
+/* Get real time & day info with seconds in WIB */
+function getFormattedDateTime() {
+  const now = new Date();
+  const options = { timeZone: 'Asia/Jakarta', hour12: false, year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+  try {
+    const formatter = new Intl.DateTimeFormat(loc(), options);
+    const parts = formatter.formatToParts(now);
+    let day='25', month='Okt', year='2026', hour='23', minute='20', second='45';
+    parts.forEach(p => {
+      if (p.type === 'day') day = p.value;
+      if (p.type === 'month') month = p.value;
+      if (p.type === 'year') year = p.value;
+      if (p.type === 'hour') hour = p.value;
+      if (p.type === 'minute') minute = p.value;
+      if (p.type === 'second') second = p.value;
+    });
+    const daysID = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const daysEN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayStr = (ui.lang === 'id' ? daysID : daysEN)[now.getDay()];
+    return { dayStr, fullDate: `${day} ${month} ${year}`, timeStr: `${hour}:${minute}:${second} WIB` };
+  } catch(e) {
+    const daysID = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    return { dayStr: daysID[now.getDay()], fullDate: now.toLocaleDateString(loc()), timeStr: now.toLocaleTimeString(loc()) + ' WIB' };
+  }
+}
+
+/* Parse & Format Weeks+Days Age ("W+D") */
+function parseAgeToDays(ageStr) {
+  if (!ageStr) return { w: 0, d: 0, totalDays: 0, valid: false };
+  const str = String(ageStr).trim();
+  if (str.includes('+')) {
+    const parts = str.split('+');
+    const w = parseInt(parts[0], 10) || 0;
+    const d = parseInt(parts[1], 10) || 0;
+    if (d < 0 || d > 6 || w < 0) return { w, d, totalDays: w * 7 + d, valid: false };
+    return { w, d, totalDays: w * 7 + d, valid: true };
+  }
+  const val = parseFloat(str) || 0;
+  if (val < 0) return { w: 0, d: 0, totalDays: 0, valid: false };
+  const w = Math.floor(val);
+  const d = Math.round((val - w) * 7);
+  return { w, d, totalDays: w * 7 + d, valid: true };
+}
+
+function formatDaysToAge(totalDays) {
+  if (totalDays < 0) totalDays = 0;
+  const w = Math.floor(totalDays / 7);
+  const d = totalDays % 7;
+  return `${w}+${d}`;
+}
+
+function formatAgeDisplay(ageStr) {
+  const parsed = parseAgeToDays(ageStr);
+  if (!parsed.valid && !ageStr) return '—';
+  if (ageStr && String(ageStr).includes('+')) {
+    const parts = String(ageStr).split('+');
+    return `${parts[0]} mgg ${parts[1]} hr`;
+  }
+  return `${parsed.w} mgg ${parsed.d} hr`;
+}
+
+function getHouseCurrentAge(houseId, targetDate = null) {
+  const h = state.houses.find(x => x.id === houseId);
+  if (!h) return '21+0';
+  const baseStart = h.baseStartDate || '2026-04-10';
+  const baseAgeDays = parseAgeToDays(h.baseAge || '21+0').totalDays;
+  const tDate = targetDate || today();
+  const diff = diffDays(baseStart, tDate);
+  return formatDaysToAge(baseAgeDays + diff);
+}
+
+/* Dynamic Live Population & Sex Ratio Logic */
+function getHouseLivePopulation(houseId, asOfDate = null) {
+  const h = state.houses.find(x => x.id === houseId);
+  if (!h) return { total: 0, males: 0, females: 0 };
+  const initMales = h.initMales !== undefined ? h.initMales : Math.round((h.pop || 20000) * 0.10);
+  const initFemales = h.initFemales !== undefined ? h.initFemales : ((h.pop || 20000) - initMales);
+
+  const tDate = asOfDate || today();
+  const mLogs = state.mortalityLogs.filter(l => l.house === houseId && l.date <= tDate);
+  const entryLogs = state.dailyEntryLogs.filter(l => l.house === houseId && l.date <= tDate);
+
+  let deadMales = 0;
+  let deadFemales = 0;
+
+  entryLogs.forEach(l => {
+    deadMales += (l.maleMortality || 0) + (l.maleCulls || 0);
+    deadFemales += (l.femaleMortality || 0) + (l.femaleCulls || 0);
+  });
+
+  if (entryLogs.length === 0) {
+    mLogs.forEach(l => {
+      deadMales += (l.maleMortality || 0) + (l.maleCulls || 0);
+      deadFemales += (l.femaleMortality || 0) + (l.femaleCulls || 0);
+      if (l.maleMortality === undefined && l.femaleMortality === undefined) {
+        const tot = (l.natural || 0) + (l.culls || 0);
+        deadFemales += Math.round(tot * 0.9);
+        deadMales += (tot - Math.round(tot * 0.9));
+      }
+    });
+  }
+
+  const currMales = Math.max(0, initMales - deadMales);
+  const currFemales = Math.max(0, initFemales - deadFemales);
+  return { total: currMales + currFemales, males: currMales, females: currFemales };
+}
+
+function getSexRatioData(hs) {
+  let totalMales = 0;
+  let totalFemales = 0;
+  hs.forEach(h => {
+    const pop = getHouseLivePopulation(h.id);
+    totalMales += pop.males;
+    totalFemales += pop.females;
+  });
+  if (totalMales === 0) return { males: 0, females: totalFemales, ratio: 'N/A' };
+  const ratio = (totalFemales / totalMales).toFixed(1);
+  return { males: totalMales, females: totalFemales, ratio: `1 : ${ratio}` };
+}
+
+function getWeeklyMortalityForHouse(houseId, asOfDate = null) {
+  const h = state.houses.find(x => x.id === houseId);
+  if (!h) return { totalPct: 0, malePct: 0, femalePct: 0, prevTotalPct: 0, prevFemalePct: 0, weekAge: '0' };
+
+  const targetDate = asOfDate || today();
+  const currentAge = getHouseCurrentAge(houseId, targetDate);
+  const parsed = parseAgeToDays(currentAge);
+  if (!parsed.valid || parsed.w < 1) return { totalPct: 0, malePct: 0, femalePct: 0, prevTotalPct: 0, prevFemalePct: 0, weekAge: '0' };
+
+  const W = parsed.w;
+  const baseStartDate = h.baseStartDate || '2026-04-10';
+  const baseAgeDays = parseAgeToDays(h.baseAge || '21+0').totalDays;
+
+  const startDayOffset = (W - 1) * 7 + 1 - baseAgeDays;
+  const endDayOffset = W * 7 - baseAgeDays;
+  const startDate = addDays(baseStartDate, startDayOffset);
+  const endDate = addDays(baseStartDate, endDayOffset);
+
+  const startPop = getHouseLivePopulation(houseId, addDays(startDate, -1));
+  const initMales = startPop.males || 1;
+  const initFemales = startPop.females || 1;
+  const initTotal = startPop.total || 1;
+
+  const logs = state.dailyEntryLogs.filter(l => l.house === houseId && l.date >= startDate && l.date <= endDate);
+  const mMort = sum(logs, l => l.maleMortality || 0);
+  const fMort = sum(logs, l => l.femaleMortality || 0);
+  const totalMort = mMort + fMort;
+
+  const malePct = (mMort / initMales) * 100;
+  const femalePct = (fMort / initFemales) * 100;
+  const totalPct = (totalMort / initTotal) * 100;
+
+  let prevTotalPct = 0;
+  let prevFemalePct = 0;
+  if (W > 1) {
+    const prevStartOffset = (W - 2) * 7 + 1 - baseAgeDays;
+    const prevEndOffset = (W - 1) * 7 - baseAgeDays;
+    const pStartDate = addDays(baseStartDate, prevStartOffset);
+    const pEndDate = addDays(baseStartDate, prevEndOffset);
+    const pStartPop = getHouseLivePopulation(houseId, addDays(pStartDate, -1));
+    const pLogs = state.dailyEntryLogs.filter(l => l.house === houseId && l.date >= pStartDate && l.date <= pEndDate);
+    const pMort = sum(pLogs, l => (l.maleMortality || 0) + (l.femaleMortality || 0));
+    const pfM = sum(pLogs, l => l.femaleMortality || 0);
+    prevTotalPct = pStartPop.total > 0 ? (pMort / pStartPop.total) * 100 : 0;
+    prevFemalePct = pStartPop.females > 0 ? (pfM / pStartPop.females) * 100 : 0;
+  }
+  return { totalPct, malePct, femalePct, prevTotalPct, prevFemalePct, weekAge: `${W}` };
+}
+
+function getFlockWeeklyMortality(hs, asOfDate = null) {
+  if (hs.length === 1) return getWeeklyMortalityForHouse(hs[0].id, asOfDate);
+  let totalMort = 0, totalInit = 0, maleMort = 0, maleInit = 0, femaleMort = 0, femaleInit = 0, prevTotalMort = 0, prevInit = 0, prevFemaleMort = 0, prevFemaleInit = 0;
+  hs.forEach(h => {
+    const currentAge = getHouseCurrentAge(h.id, asOfDate || today());
+    const parsed = parseAgeToDays(currentAge);
+    const W = parsed.w || 1;
+    const baseStartDate = h.baseStartDate || '2026-04-10';
+    const baseAgeDays = parseAgeToDays(h.baseAge || '21+0').totalDays;
+
+    const startDayOffset = (W - 1) * 7 + 1 - baseAgeDays;
+    const endDayOffset = W * 7 - baseAgeDays;
+    const startDate = addDays(baseStartDate, startDayOffset);
+    const endDate = addDays(baseStartDate, endDayOffset);
+    const startPop = getHouseLivePopulation(h.id, addDays(startDate, -1));
+    const logs = state.dailyEntryLogs.filter(l => l.house === h.id && l.date >= startDate && l.date <= endDate);
+    const mM = sum(logs, l => l.maleMortality || 0);
+    const fM = sum(logs, l => l.femaleMortality || 0);
+
+    totalMort += mM + fM; totalInit += startPop.total;
+    maleMort += mM; maleInit += startPop.males;
+    femaleMort += fM; femaleInit += startPop.females;
+
+    if (W > 1) {
+      const pStartDate = addDays(baseStartDate, (W - 2) * 7 + 1 - baseAgeDays);
+      const pEndDate = addDays(baseStartDate, (W - 1) * 7 - baseAgeDays);
+      const pStartPop = getHouseLivePopulation(h.id, addDays(pStartDate, -1));
+      const pLogs = state.dailyEntryLogs.filter(l => l.house === h.id && l.date >= pStartDate && l.date <= pEndDate);
+      prevTotalMort += sum(pLogs, l => (l.maleMortality || 0) + (l.femaleMortality || 0));
+      prevFemaleMort += sum(pLogs, l => l.femaleMortality || 0);
+      prevInit += pStartPop.total;
+      prevFemaleInit += pStartPop.females;
+    }
+  });
+  return {
+    totalPct: totalInit > 0 ? (totalMort / totalInit) * 100 : 0,
+    malePct: maleInit > 0 ? (maleMort / maleInit) * 100 : 0,
+    femalePct: femaleInit > 0 ? (femaleMort / femaleInit) * 100 : 0,
+    prevTotalPct: prevInit > 0 ? (prevTotalMort / prevInit) * 100 : 0,
+    prevFemalePct: prevFemaleInit > 0 ? (prevFemaleMort / prevFemaleInit) * 100 : 0,
+    weekAge: 'avg'
+  };
+}
+
+/* ================= production reference module helpers ================= */
+function getDefaultReferenceTable() {
+  const table = {};
+  for (let w = 1; w <= 65; w++) {
+    let maleBw = Math.min(4800, Math.round(150 + w * 65));
+    let femaleBw = Math.min(3800, Math.round(130 + w * 55));
+    let hdp = w < 22 ? 0 : (w === 22 ? 15 : (w === 24 ? 55 : (w === 26 ? 82 : (w <= 32 ? Math.min(93, 82 + (w - 26) * 2) : Math.max(60, 93 - (w - 32) * 0.9)))));
+    table[w] = {
+      maleBw: maleBw,
+      femaleBw: femaleBw,
+      maleMort: 0.05,
+      femaleMort: 0.04,
+      hdp: +hdp.toFixed(1),
+      hatching: w >= 25 ? 85.0 : 0.0,
+      sexRatio: '1 : 9.0',
+      uniformity: 88.0,
+      cv: 7.5,
+      maleWeeklyGain: w <= 5 ? 140 : 50,
+      femaleWeeklyGain: w <= 5 ? 120 : 40,
+      malePointFeed: 140 + Math.round(w * 1.5),
+      femalePointFeed: 125 + Math.round(w * 1.2),
+      eggWeight: w < 24 ? 50 : Math.min(68, 52 + (w - 24) * 0.4)
+    };
+  }
+  return table;
+}
+
+function getReferenceTarget(weekNum, paramKey) {
+  if (!state.productionReference || !state.productionReference[weekNum]) {
+    const def = getDefaultReferenceTable();
+    return def[weekNum]?.[paramKey] || 0;
+  }
+  return state.productionReference[weekNum][paramKey] || 0;
+}
+
+/* ================= state ================= */
+let state=null, ui={
+  tab:'dash', house:'all', lang:'id', dark:false, matrixId:null, search:'', dismissAlert:false, diagHouse:'all',
+  prodHouseFilter: [1,2,3,4,5,6,7,8,9], prodRowsPerPage: 10, prodCurrentPage: 1,
+  sampHouseFilter: [1,2,3,4,5,6,7,8,9], sampRowsPerPage: 10, sampCurrentPage: 1,
+  opgHouseFilter: [1,2,3,4,5,6,7,8,9], chartDays: 7
+}, persistent=false;
+let lastDeleted = null, undoTimer = null;
+const KEY='aviancare:v5';
+const SAMPLE_TYPES=['feces','serum','swab','tissue','env'], STATUSES=['pending','collected','testing','done'], SYSTEMS=['resp','gi','cardio','nerv','msk'];
+const CAUSES=['sudden','disease','prolapse','trauma','heat','peritonitis','weak','unknown'];
+const ANTIGENS=['ND', 'IB', 'IBD', 'AI H5', 'AI H9', 'MG', 'MS', 'Reovirus', 'AE', "Marek's disease", 'ILT', 'FAdV', 'EDS-76', 'Lainnya'];
+
+function seed(){
+  const T=today(), pops=[20800,21200,19800,20500,20900,20100,20600,19500,21100];
+  const s={
+    houses:pops.map((p,i)=>({
+      id:i+1, pop:p, initMales: Math.round(p * 0.10), initFemales: Math.round(p * 0.90),
+      baseStartDate: '2026-04-10', baseAge: `${21 + (i % 3)}+0`
+    })),
+    samples:[],
+    weeklyMatrixList:[],
+    masterDrugCatalog:['Vitastress Powder','Vitamin AD3E','Electrolyte','Enrofloxacin','Amoxicillin','Doxycycline','Probiotic','Calcium Liquid'],
+    necropsyRecords:[],bodyWeightData:[],mortalityLogs:[],productionLogs:[],dailyEntryLogs:[],
+    productionReference: getDefaultReferenceTable(),
+    profile:{name:'drh. Ozzan',reg:'128/VET/2024',farm:'Layer Breeder Farm'},report:{summary:''},settings:{lang:'id',dark:false}
+  };
+
+  for(let h=1;h<=9;h++){
+    const base=88+(h%3)*.4-.5;
+    for(let i=95;i>=0;i--){
+      const d=addDays(T,-i);
+      const mMort = R(0, 1);
+      const fMort = R(1, 4);
+      const mCull = R(0, 1);
+      const fCull = R(0, 1);
+      const necropsyCount = R(0, Math.min(2, mMort + fMort + mCull + fCull));
+      s.dailyEntryLogs.push({
+        id:uid(), date:d, house:h,
+        intactEggs:R(16000,18500), brokenEggs:R(20,80), freeEggs:R(10,40),
+        maleMortality:mMort, femaleMortality:fMort,
+        maleCulls:mCull, femaleCulls:fCull,
+        totalNecropsy:necropsyCount,
+        notes:i===0?'Kondisi pakan normal':''
+      });
+      s.productionLogs.push({date:d,house:h,hd:+(base+(Math.random()-.5)*4).toFixed(1)});
+      s.mortalityLogs.push({id:uid(),date:d,house:h,natural:mMort+fMort,culls:mCull+fCull,maleMortality:mMort,femaleMortality:fMort,cause:CAUSES[R(0,4)]});
+    }
+    [[7,2440],[0,2485]].forEach(([ago,m])=>{const mean=m+R(-25,25);s.bodyWeightData.push({id:uid(),date:addDays(T,-ago),house:h,age:25+Math.round(-ago/7)+(h%3),n:60,mean,unif:R(85,93),cv:+(R(55,85)/10).toFixed(1),target:ago?2400:2450})});
+  }
+
+  s.samples.push(
+    {id:uid(),date:addDays(T,-5),house:3,sampleAge:'25+3',type:'feces',qty:14,purpose:'OPG',status:'done',pens:[{pen:1,opg:1200},{pen:2,opg:1500},{pen:3,opg:900},{pen:4,opg:1400}],value:1250,unit:'OPG',findings:'Eimeria oocysts detected'},
+    {id:uid(),date:addDays(T,-2),house:7,sampleAge:'24+0',type:'feces',qty:7,purpose:'OPG',status:'testing',pens:[{pen:1,opg:350},{pen:2,opg:420}],value:385,unit:'OPG',findings:''},
+    {id:uid(),date:addDays(T,1),house:5,sampleAge:'25+4',type:'serum',qty:16,purpose:'Serology Panel',status:'done',antigens:[{name:'ND',method:'HI',titer:7.2,cv:18.5,n:16},{name:'IB',method:'HI',titer:6.5,cv:22.0,n:16},{name:'IBD',method:'ELISA',titer:3240,cv:25.4,n:16},{name:'AI H5',method:'HI',titer:8.0,cv:12.0,n:16}]}
+  );
+
+  for(let wk=21; wk<=26; wk++) {
+    for(let h=1; h<=9; h++) {
+      const avgOpg = R(150, 850);
+      s.samples.push({
+        id: uid(),
+        date: addDays(T, -(26 - wk) * 7),
+        house: h,
+        sampleAge: `${wk}+0`,
+        type: 'feces',
+        qty: 7,
+        purpose: 'OPG',
+        status: 'done',
+        pens: Array.from({length:4}, (_, idx) => ({ pen: idx + 1, opg: avgOpg + R(-60, 60) })),
+        value: avgOpg,
+        unit: 'OPG',
+        findings: `Oosit Eimeria ${avgOpg} OPG`
+      });
+    }
+  }
+
+  const monday=mondayOf(T), cells={};
+  for(let h=0;h<9;h++){cells[h]=[];for(let d=0;d<7;d++){const sl=[{drug:'Vitastress Powder',dose:'1g/2L'},{drug:'Vitamin AD3E',dose:'1ml/4L'},{drug:'',dose:''}];cells[h].push(sl);}}
+  s.weeklyMatrixList.push({id:uid(),title:'Program Mingguan',monday,cells});
+  return s;
+}
+
+async function load(){
+  try{ if(window.storage){persistent=true;const r=await window.storage.get(KEY);if(r&&r.value){state=JSON.parse(r.value);} } }catch(e){}
+  if(!state)state=seed();
+  ['houses','samples','weeklyMatrixList','masterDrugCatalog','necropsyRecords','bodyWeightData','mortalityLogs','productionLogs','dailyEntryLogs'].forEach(k=>{if(!state[k])state[k]=[]});
+  if(!state.productionReference)state.productionReference=getDefaultReferenceTable();
+  state.profile=state.profile||{name:'',reg:'',farm:''};state.report=state.report||{summary:''};state.settings=state.settings||{lang:'id',dark:false};
+  ui.lang=state.settings.lang;ui.dark=state.settings.dark;
+}
+
+async function save(){
+  state.settings={lang:ui.lang,dark:ui.dark};
+  try{ if(window.storage){await window.storage.set(KEY,JSON.stringify(state));persistent=true;} }catch(e){persistent=false;}
+}
+
+function toast(m, canUndo = false){
+  const e=$('#toast');
+  e.innerHTML = `<span>${esc(m)}</span>${canUndo ? `<button class="toast-undo" id="undobtn">BATAL (UNDO)</button>` : ''}`;
+  e.classList.add('show');
+  clearTimeout(toast.t);
+  clearTimeout(undoTimer);
+
+  if (canUndo) {
+    const uBtn = $('#undobtn');
+    if (uBtn) {
+      uBtn.onclick = async () => {
+        if (lastDeleted) {
+          state[lastDeleted.col].push(lastDeleted.item);
+          await save();
+          render();
+          lastDeleted = null;
+          e.classList.remove('show');
+          toast('Data berhasil dipulihkan.');
+        }
+      };
+    }
+    undoTimer = setTimeout(() => {
+      lastDeleted = null;
+    }, 3000);
+  }
+
+  toast.t = setTimeout(() => {
+    e.classList.remove('show');
+  }, 3000);
+}
+
+/* ================= calculations ================= */
+const flt=()=>ui.tab==='dash'?ui.house:'all';
+const HS=()=>flt()==='all'?state.houses:state.houses.filter(h=>h.id===+flt());
+const inScope=r=>flt()==='all'||r.house===+flt();
+const popOf=hs=>sum(hs,h=>getHouseLivePopulation(h.id).total);
+
+function hdOn(date,hs){
+  let w=0,p=0;
+  hs.forEach(h=>{
+    const r=state.productionLogs.find(x=>x.date===date&&x.house===h.id);
+    const livePop = getHouseLivePopulation(h.id, date).total;
+    if(r){w+=r.hd*livePop;p+=livePop}
+  });
+  return p?w/p:null;
+}
+
+function lastHD(hs){const dates=[...new Set(state.productionLogs.map(x=>x.date))].sort();for(let i=dates.length-1;i>=0;i--){const v=hdOn(dates[i],hs);if(v!==null)return v}return null}
+function deadOn(date,hs){const ids=hs.map(h=>h.id);return sum(state.mortalityLogs.filter(m=>m.date===date&&ids.includes(m.house)),m=>m.natural+m.culls)}
+function mort7(hs){const p=popOf(hs);if(!p)return 0;let d=0;for(let i=0;i<7;i++)d+=deadOn(addDays(today(),-i),hs);return d/7/p*100}
+
+function femaleBwLatest(hs){
+  const rows=hs.map(h=>state.bodyWeightData.filter(b=>b.house===h.id).sort((a,b)=>b.date.localeCompare(a.date))[0]).filter(Boolean);
+  if(!rows.length)return null;
+  const mean=sum(rows,r=>r.mean)/rows.length;
+  const unif=sum(rows,r=>r.unif)/rows.length;
+  const cv=sum(rows,r=>r.cv)/rows.length;
+  const age=rows[0].age;
+  const houseId=rows[0].house;
+  
+  let actualWeeklyGain = 120;
+  const hBwList = state.bodyWeightData.filter(b => b.house === houseId).sort((a,b)=>b.date.localeCompare(a.date));
+  if (hBwList.length >= 2) {
+    const latest = hBwList[0];
+    const prev = hBwList[1];
+    const dDays = diffDays(prev.date, latest.date);
+    if (dDays > 0) {
+      actualWeeklyGain = Math.round(((latest.mean - prev.mean) / dDays) * 7);
+    }
+  }
+  return { mean, unif, cv, age, actualWeeklyGain };
+}
+
+const pendingSoon=(all)=>state.samples.filter(s=>s.status==='pending'&&(all||inScope(s))&&diffDays(today(),s.date)<=2).sort((a,b)=>a.date.localeCompare(b.date));
+const activeMatrix=()=>state.weeklyMatrixList.find(m=>{const d=diffDays(m.monday,today());return d>=0&&d<=6});
+const curMatrix=()=>state.weeklyMatrixList.find(m=>m.id===ui.matrixId)||activeMatrix()||state.weeklyMatrixList[0];
+const todayIdx=()=>(new Date().getDay()+6)%7;
+const stPill=s=>({pending:'p-a',collected:'p-s',testing:'p-a',done:'p-g'}[s]);
+
+function getAccumulatedMortalityAndNecropsy(hs) {
+  const ids = hs.map(h => h.id);
+  const causeCounts = {};
+  CAUSES.forEach(c => causeCounts[c] = 0);
+  
+  let totalNecropsyPerformed = 0;
+  let totalNecropsyNotPerformed = 0;
+
+  state.mortalityLogs.filter(m => ids.includes(m.house)).forEach(m => {
+    const tot = (m.natural || 0) + (m.culls || 0);
+    const c = m.cause || 'unknown';
+    if (causeCounts[c] !== undefined) causeCounts[c] += tot;
+    else causeCounts['unknown'] = (causeCounts['unknown'] || 0) + tot;
+  });
+
+  state.dailyEntryLogs.filter(l => ids.includes(l.house)).forEach(l => {
+    const totMort = (l.maleMortality || 0) + (l.femaleMortality || 0) + (l.maleCulls || 0) + (l.femaleCulls || 0);
+    const nec = l.totalNecropsy || 0;
+    totalNecropsyPerformed += Math.min(nec, totMort);
+    totalNecropsyNotPerformed += Math.max(0, totMort - nec);
+  });
+
+  if (totalNecropsyPerformed === 0 && totalNecropsyNotPerformed === 0) {
+    const totalMortSum = sum(state.mortalityLogs.filter(m => ids.includes(m.house)), m => (m.natural || 0) + (m.culls || 0));
+    totalNecropsyPerformed = Math.round(totalMortSum * 0.4);
+    totalNecropsyNotPerformed = Math.max(0, totalMortSum - totalNecropsyPerformed);
+  }
+
+  const sortedCauses = Object.entries(causeCounts).map(([cause, count]) => ({ cause, count, name: t('c_' + cause) })).sort((a, b) => b.count - a.count);
+  const top5 = sortedCauses.slice(0, 5);
+  const others = sortedCauses.slice(5);
+  const othersCount = sum(others, x => x.count);
+  const unknownCount = causeCounts['unknown'] || 0;
+
+  const grandTotal = sum(sortedCauses, x => x.count) + totalNecropsyPerformed + totalNecropsyNotPerformed || 1;
+
+  const barItems = [
+    ...top5.map(c => ({ name: c.name, count: c.count, color: '#e11d48' })),
+    { name: 'Unknown & Lainnya', count: unknownCount + othersCount, color: '#f59e0b' },
+    { name: 'Unnecropsied', count: totalNecropsyNotPerformed, color: '#64748b' }
+  ];
+
+  return barItems.map(x => ({ ...x, pct: +(x.count / grandTotal * 100).toFixed(1) }));
+}
+
+/* ================= Helper UI ================= */
+function renderHouseCBs(key) {
+  const arr = ui[key] || [];
+  const allChecked = arr.length === 9;
+  let html = `<div class="dd cb-dd" data-key="${key}">
+    <button type="button" class="btn sm" data-act="ddtoggle" aria-haspopup="true" aria-expanded="false" style="background:var(--glass); border:1px solid var(--border)">
+      <i class="fa-solid fa-filter"></i> Filter (${allChecked ? 'Semua' : arr.length}) <i class="fa-solid fa-chevron-down" style="font-size:10px;margin-left:4px"></i>
+    </button>
+    <div class="dd-menu" hidden style="width:220px;padding:12px;z-index:50">
+      <label style="font-weight:700;margin-bottom:8px;font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" value="all" ${allChecked ? 'checked' : ''} style="width:16px;height:16px;accent-color:var(--g6)" onchange="const c=this.checked; this.closest('.dd-menu').querySelectorAll('.h-cb').forEach(x=>x.checked=c)"> Semua Kandang
+      </label>
+      <div style="border-top:1px dashed var(--border); margin:8px 0"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px">`;
+  for(let i=1; i<=9; i++) {
+    html += `<label style="font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer">
+      <input type="checkbox" class="h-cb" value="${i}" ${arr.includes(i) ? 'checked' : ''} style="width:14px;height:14px;accent-color:var(--g6)"> Kd ${i}
+    </label>`;
+  }
+  html += `</div>
+      <button type="button" class="btn sm g" style="width:100%;justify-content:center" data-act="applyCb" data-k="${key}">Terapkan Filter</button>
+    </div></div>`;
+  return html;
+}
+
+/* ================= CRUD & Forms ================= */
+const houseOpts=()=>state.houses.map(h=>({v:h.id,t:`${t('house')} ${h.id}`}));
+const optsOf=(arr,pre)=>arr.map(v=>({v,t:t(pre+v)}));
+const defHouse=()=>1;
+
+const CFG={
+ samples:{col:'samples',title:'addS',fields:()=>[
+  {n:'date',l:'date',t:'date',req:1,def:addDays(today(),1)},
+  {n:'house',l:'house',t:'select',opts:houseOpts(),def:defHouse()},
+  {n:'sampleAge',l:'Umur Sampling (Mgg+Hari, cth: 25+3)',t:'text',req:1,ph:'25+3',def:'25+0'},
+  {n:'type',l:'type',t:'select',opts:[{v:'feces',t:'Feces'},{v:'serum',t:'Blood/Serum'},{v:'swab',t:'Swab'},{v:'tissue',t:'Jaringan'},{v:'env',t:'Lingkungan'}]},
+  {n:'qty',l:'qty',t:'number',def:10,min:1},
+  {n:'purpose',l:'purpose',t:'text',req:0,full:1,ph:'OPG, Serology Panel, HI-ND…'}],
+  norm:v=>({...v,house:+v.house,qty:+v.qty||1,status:v.status||'pending',purpose:v.purpose||'Unspecified'})},
+ necropsyRecords:{col:'necropsyRecords',title:'addN',fields:()=>[
+  {n:'date',l:'date',t:'date',req:1,def:today()},{n:'age',l:'age',t:'number',min:0,def:25},
+  {n:'house',l:'house',t:'select',opts:houseOpts(),def:defHouse()},
+  {n:'sex',l:'Jenis Kelamin',t:'select',opts:[{v:'female',t:'Betina (♀)'},{v:'male',t:'Jantan (♂)'}],req:1,def:'female'},
+  {n:'qty',l:'exam',t:'number',min:1,def:3},
+  {n:'lesions',l:'lesions',t:'textarea',req:1,full:1},{n:'system',l:'system',t:'select',opts:optsOf(SYSTEMS,'sy_')},{n:'diagnosis',l:'dx',t:'text'},
+  {n:'reco',l:'reco',t:'textarea',full:1}],
+  norm:v=>({...v,house:+v.house,qty:+v.qty||1,age:+v.age||0,sex:v.sex||'female'})},
+ bodyWeightData:{col:'bodyWeightData',title:'addB',fields:()=>[
+  {n:'date',l:'date',t:'date',req:1,def:today()},{n:'house',l:'house',t:'select',opts:houseOpts(),def:defHouse()},
+  {n:'age',l:'age',t:'number',min:0},{n:'n',l:'nS',t:'number',min:1,def:60},
+  {n:'mean',l:'mean',t:'number',req:1,min:1},{n:'unif',l:'unif',t:'number',min:0},{n:'cv',l:'cv',t:'number',min:0},{n:'target',l:'tgt',t:'number',min:0}],
+  norm:v=>({...v,house:+v.house,age:+v.age||0,n:+v.n||0,mean:+v.mean,unif:+v.unif||0,cv:+v.cv||0,target:+v.target||0})},
+ mortalityLogs:{col:'mortalityLogs',title:'addM',fields:()=>[
+  {n:'date',l:'date',t:'date',req:1,def:today()},{n:'house',l:'house',t:'select',opts:houseOpts(),def:defHouse()},
+  {n:'natural',l:'nat',t:'number',min:0,def:0},{n:'culls',l:'cull',t:'number',min:0,def:0},
+  {n:'cause',l:'cause',t:'select',opts:optsOf(CAUSES,'c_'),full:1}],
+  norm:v=>({...v,house:+v.house,natural:+v.natural||0,culls:+v.culls||0})}
+};
+
+function fieldHTML(f,val){
+  const v=val??f.def??'',req=f.req?' required':'',lab=t(f.l)==='f.l'?f.l:t(f.l);
+  let c='';
+  if(f.t==='select')c=`<select class="sel" name="${f.n}">${f.opts.map(o=>`<option value="${esc(o.v)}"${String(o.v)===String(v)?' selected':''}>${esc(o.t)}</option>`).join('')}</select>`;
+  else if(f.t==='textarea')c=`<textarea class="inp" name="${f.n}"${req}>${esc(v)}</textarea>`;
+  else c=`<input class="inp" type="${f.t}" name="${f.n}" value="${esc(v)}" placeholder="${esc(f.ph||'')}" step="any"${f.min!==undefined?` min="${f.min}"`:''}${req}>`;
+  return `<label class="fl${f.full?' full':''}">${esc(lab)}${c}</label>`;
+}
+
+function openModal(html,wide){
+  $('#modal').innerHTML=`<div class="ov" id="ov"><div class="md" role="dialog" aria-modal="true"${wide?' style="width:min(760px,100%)"':''}>${html}</div></div>`;
+  $('#ov').addEventListener('mousedown',e=>{if(e.target.id==='ov')closeModal()});
+  const f=$('#modal input,#modal select,#modal textarea');if(f&&f.type!=='file')f.focus();
+}
+
+function openImageViewer(src) {
+  $('#modal').innerHTML=`<div class="ov" id="ov"><div class="md" style="width:min(90vw,900px);padding:16px;text-align:center"><img src="${src}" style="max-width:100%;max-height:80vh;border-radius:12px"><div class="acts" style="margin-top:16px;justify-content:center"><button class="btn" data-act="closem">Tutup Gambar</button></div></div></div>`;
+  $('#ov').addEventListener('mousedown',e=>{if(e.target.id==='ov')closeModal()});
+}
+
+const closeModal=()=>{$('#modal').innerHTML=''};
+
+function openForm(key,rec,pre){
+  const c=CFG[key],vals={...(pre||{}),...(rec||{})};
+  const fields=c.fields();
+  
+  let currentImages = rec && rec.images ? [...rec.images] : [];
+  let customHtml = '';
+  if (key === 'necropsyRecords') {
+    customHtml = `
+    <div class="full" style="background:var(--soft);padding:14px;border-radius:12px;margin-top:8px">
+      <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:8px">Upload Foto Nekropsi (Opsional)
+        <input type="file" id="necImgUpload" accept="image/*" multiple style="display:block;margin-top:6px;font-weight:400" class="inp">
+      </label>
+      <div id="necImgPreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div>
+    </div>`;
+  }
+
+  openModal(`<h3>${rec?t('edit'):t(c.title)}</h3><form id="frm" novalidate><div class="fg">${fields.map(f=>fieldHTML(f,vals[f.n])).join('')}${customHtml}</div><div class="err" id="ferr" role="alert"></div><div class="acts"><button type="button" class="btn" data-act="closem">${t('cancel')}</button><button class="btn g" type="submit">${t('save')}</button></div></form>`);
+  
+  if (key === 'necropsyRecords') {
+    const renderPreview = () => {
+      $('#necImgPreview').innerHTML = currentImages.map((src, i) => `<div class="img-wrap"><img src="${src}" class="img-preview" onclick="openImageViewer('${src}')" title="Klik untuk memperbesar"><button type="button" class="img-rm" data-idx="${i}"><i class="fa-solid fa-xmark"></i></button></div>`).join('');
+      document.querySelectorAll('.img-rm').forEach(b => b.onclick = (e) => {
+        currentImages.splice(+e.currentTarget.dataset.idx, 1);
+        renderPreview();
+      });
+    };
+    renderPreview();
+    $('#necImgUpload').onchange = async (e) => {
+      for (const file of e.target.files) {
+        const compressed = await compressImage(file);
+        currentImages.push(compressed);
+      }
+      renderPreview();
+      e.target.value = '';
+    };
+  }
+
+  $('#frm').onsubmit=async e=>{
+    e.preventDefault();const fd=new FormData(e.target),o={};
+    for(const f of fields){o[f.n]=(fd.get(f.n)??'').toString().trim();if(f.req&&!o[f.n]&&f.n!=='purpose'){$('#ferr').textContent=`${t(f.l)} ${t('req')}`;return}}
+    if(key==='samples'){
+      const ageStr=o.sampleAge||'25+0';
+      const parsed=parseAgeToDays(ageStr);
+      if(!parsed.valid){$('#ferr').textContent=`Format umur sampling harus Minggu+Hari (cth: 25+3, hari 0-6)`;return}
+    }
+    const data=c.norm(o);
+    
+    if (key === 'necropsyRecords') {
+      data.images = currentImages;
+    }
+
+    if(rec){Object.assign(rec,data)}
+    else state[key].push({id:uid(),...(pre&&pre._keep?{}:{}),...data});
+    await save();closeModal();render();toast(t('saved'));
+  };
+}
+
+function openResult(rec){
+  const isFeces = rec.type === 'feces';
+  const isSerum = rec.type === 'serum';
+  let curPens = rec.pens || [{ pen: 1, opg: rec.value || 0 }];
+  let curAntigens = rec.antigens || [{ name: 'ND', method: 'HI', titer: rec.value || 7.0, cv: rec.unit === 'OPG' ? 0 : 15.0, n: rec.qty || 16 }];
+
+  const renderPenInputs = () => {
+    return curPens.map((p, idx) => `
+      <div class="row" style="gap:8px;margin-bottom:8px;align-items:center" data-pen-idx="${idx}">
+        <select class="sel pen-num-sel" style="width:110px">
+          ${[1,2,3,4,5,6,7].map(n=>`<option value="${n}"${p.pen===n?' selected':''}>Pan ${n}</option>`).join('')}
+        </select>
+        <input class="inp pen-opg-input" type="number" min="0" placeholder="Average OPG" value="${p.opg || 0}" style="flex:1">
+        <button type="button" class="ic del remove-pen-btn" data-idx="${idx}"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    `).join('');
+  };
+
+  const renderAntigenInputs = () => {
+    return curAntigens.map((a, idx) => `
+      <div class="card" style="padding:12px;margin-bottom:10px;background:var(--soft);position:relative" data-ag-idx="${idx}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <b>Antigen / Target #${idx+1}</b>
+          <button type="button" class="ic del remove-ag-btn" data-idx="${idx}"><i class="fa-solid fa-trash"></i></button>
+        </div>
+        <div class="fg" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr">
+          <label class="fl">Target Antigen
+            <select class="sel ag-name-sel">
+              ${ANTIGENS.map(ag=>`<option value="${ag}"${a.name===ag?' selected':''}>${ag}</option>`).join('')}
+            </select>
+          </label>
+          <label class="fl">Metode
+            <select class="sel ag-meth-sel">
+              <option value="HI"${a.method==='HI'?' selected':''}>HI</option>
+              <option value="ELISA"${a.method==='ELISA'?' selected':''}>ELISA</option>
+              <option value="PCR"${a.method==='PCR'?' selected':''}>PCR</option>
+            </select>
+          </label>
+          <label class="fl">Average Titer
+            <input class="inp ag-titer-inp" type="number" step="any" value="${a.titer || 0}">
+          </label>
+          <label class="fl">CV (%)
+            <input class="inp ag-cv-inp" type="number" min="0" step="any" value="${a.cv || 0}">
+          </label>
+          <label class="fl">Sampel (n)
+            <input class="inp ag-n-inp" type="number" min="1" value="${a.n || 16}">
+          </label>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  openModal(`
+    <h3>${t('inRes')} · ${esc(rec.purpose || rec.type)} · ${t('house')} ${rec.house} (${formatAgeDisplay(rec.sampleAge)})</h3>
+    <form id="resfrm">
+      <div class="fg">
+        <label class="fl full">${t('status')}
+          <select class="sel" name="status" id="res_status">
+            ${STATUSES.map(s=>`<option value="${s}"${rec.status===s?' selected':''}>${t('st_'+s)}</option>`).join('')}
+          </select>
+        </label>
+
+        ${isFeces ? `
+          <div id="opgMultiPanContainer" class="full" style="background:var(--soft);padding:14px;border-radius:14px;margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <b>OPG Sampling Results (Multi-Pan)</b>
+              <button type="button" class="btn sm g" id="addPenBtn"><i class="fa-solid fa-plus"></i> Tambah Pan</button>
+            </div>
+            <div id="pensList">${renderPenInputs()}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:8px">Rata-rata OPG Kandang: <b id="avgOpgDisplay" style="color:var(--text);font-size:14px">0</b> OPG</div>
+          </div>
+        ` : ''}
+
+        ${isSerum ? `
+          <div id="serumMultiAntigenContainer" class="full" style="background:var(--soft);padding:14px;border-radius:14px;margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <b>Diagnostic Test Results (Multi-Antigen Serology)</b>
+              <button type="button" class="btn sm g" id="addAgBtn"><i class="fa-solid fa-plus"></i> Tambah Antigen</button>
+            </div>
+            <div id="antigensList">${renderAntigenInputs()}</div>
+          </div>
+        ` : ''}
+
+        ${!isFeces && !isSerum ? `
+          <label class="fl"><t('value')}<input class="inp" type="number" step="any" name="value" value="${esc(rec.value??'')}"></label>
+          <label class="fl"><t('unit')}<input class="inp" name="unit" value="${esc(rec.unit||'')}"></label>
+        ` : ''}
+
+        <label class="fl full">${t('findings')}<textarea class="inp" name="findings">${esc(rec.findings||'')}</textarea></label>
+      </div>
+
+      <div class="acts">
+        <button type="button" class="btn" data-act="closem">${t('cancel')}</button>
+        <button class="btn g" type="submit">${t('save')}</button>
+      </div>
+    </form>
+  `, true);
+
+  const calcAvg = () => {
+    const rows = document.querySelectorAll('#pensList > div');
+    let sumVal = 0, count = 0;
+    rows.forEach(r => {
+      const v = parseFloat(r.querySelector('.pen-opg-input').value);
+      if (!isNaN(v)) { sumVal += v; count++; }
+    });
+    const avg = count > 0 ? Math.round(sumVal / count) : 0;
+    const disp = $('#avgOpgDisplay');
+    if (disp) disp.textContent = n0(avg);
+    return { avg, count };
+  };
+
+  const attachPenEvents = () => {
+    document.querySelectorAll('.pen-opg-input').forEach(inp => inp.oninput = calcAvg);
+    document.querySelectorAll('.remove-pen-btn').forEach(btn => {
+      btn.onclick = (e) => {
+        const idx = parseInt(e.currentTarget.dataset.idx, 10);
+        curPens.splice(idx, 1);
+        $('#pensList').innerHTML = renderPenInputs();
+        attachPenEvents();
+        calcAvg();
+      };
+    });
+  };
+
+  const attachAgEvents = () => {
+    document.querySelectorAll('.remove-ag-btn').forEach(btn => {
+      btn.onclick = (e) => {
+        const idx = parseInt(e.currentTarget.dataset.idx, 10);
+        curAntigens.splice(idx, 1);
+        $('#antigensList').innerHTML = renderAntigenInputs();
+        attachAgEvents();
+      };
+    });
+  };
+
+  attachPenEvents();
+  attachAgEvents();
+  if (isFeces) calcAvg();
+
+  const addPenBtn = $('#addPenBtn');
+  if (addPenBtn) {
+    addPenBtn.onclick = () => {
+      if (curPens.length >= 7) { toast('Maksimal 7 pan per sesi sampling'); return; }
+      const usedPens = curPens.map(p => p.pen);
+      let nextPen = 1;
+      while (usedPens.includes(nextPen) && nextPen <= 7) nextPen++;
+      curPens.push({ pen: nextPen, opg: 0 });
+      $('#pensList').innerHTML = renderPenInputs();
+      attachPenEvents();
+      calcAvg();
+    };
+  }
+
+  const addAgBtn = $('#addAgBtn');
+  if (addAgBtn) {
+    addAgBtn.onclick = () => {
+      curAntigens.push({ name: 'IBD', method: 'ELISA', titer: 2500, cv: 20.0, n: 16 });
+      $('#antigensList').innerHTML = renderAntigenInputs();
+      attachAgEvents();
+    };
+  }
+
+  $('#resfrm').onsubmit = async e => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    rec.status = fd.get('status');
+    rec.findings = fd.get('findings').trim();
+
+    if (isFeces) {
+      const rows = document.querySelectorAll('#pensList > div');
+      const updatedPens = [];
+      const seenPens = new Set();
+      for (const r of rows) {
+        const pNum = parseInt(r.querySelector('.pen-num-sel').value, 10);
+        const opgVal = parseFloat(r.querySelector('.pen-opg-input').value) || 0;
+        if (seenPens.has(pNum)) {
+          toast(`Duplikasi Pan ${pNum} terdeteksi! Setiap pan hanya boleh 1 entri.`);
+          return;
+        }
+        seenPens.add(pNum);
+        updatedPens.push({ pen: pNum, opg: opgVal });
+      }
+      rec.pens = updatedPens;
+      const avgRes = calcAvg();
+      rec.value = avgRes.avg;
+      rec.unit = 'OPG';
+      rec.purpose = 'OPG';
+    } else if (isSerum) {
+      const agRows = document.querySelectorAll('#antigensList > div');
+      const updatedAgs = [];
+      for (const r of agRows) {
+        updatedAgs.push({
+          name: r.querySelector('.ag-name-sel').value,
+          method: r.querySelector('.ag-meth-sel').value,
+          titer: parseFloat(r.querySelector('.ag-titer-inp').value) || 0,
+          cv: parseFloat(r.querySelector('.ag-cv-inp').value) || 0,
+          n: parseInt(r.querySelector('.ag-n-inp').value) || 16
+        });
+      }
+      rec.antigens = updatedAgs;
+      rec.purpose = 'Serology Panel';
+    } else {
+      rec.value = fd.get('value') === '' ? null : +fd.get('value');
+      rec.unit = fd.get('unit').trim();
+    }
+
+    await save();
+    closeModal();
+    render();
+    toast(t('saved'));
+  };
+}
+
+function openQuick(){
+  const items=[['dailyEntryLogs','fa-clipboard-list','c-g','prodinput'],['mortalityLogs','fa-skull-crossbones','c-r','mortality'],['necropsyRecords','fa-notes-medical','c-r','necropsy'],['bodyWeightData','fa-weight-scale','c-a','bw'],['samples','fa-vial','c-s','samples']];
+  openModal(`<h3>${t('quickT')}</h3><p class="muted" style="margin-bottom:12px">${t('quickS')}</p><div class="grid eq">${items.map(([k,i,c,l])=>`<button class="card" style="cursor:pointer;display:flex;gap:12px;align-items:center;text-align:left;color:inherit" data-act="quickgo" data-k="${k}"><span class="kpi"><span class="ico ${c}"><i class="fa-solid ${i}"></i></span></span><b>${t(l)}</b></button>`).join('')}</div>
+  <div class="acts"><button class="btn" data-act="closem">${t('close')}</button></div>`);
+}
+
+function openProfile(){
+  const p=state.profile;
+  openModal(`<h3>${t('profT')}</h3><form id="frm"><div class="fg">
+  <label class="fl full">${t('pName')}<input class="inp" name="name" value="${esc(p.name)}"></label>
+  <label class="fl">${t('pReg')}<input class="inp" name="reg" value="${esc(p.reg)}"></label>
+  <label class="fl">${t('pFarm')}<input class="inp" name="farm" value="${esc(p.farm)}"></label></div>
+  <div class="acts" style="justify-content:space-between;flex-wrap:wrap"><span class="row"><button type="button" class="btn sm" data-act="backup"><i class="fa-solid fa-download"></i>${t('backup')}</button>
+  <label class="btn sm" style="cursor:pointer"><i class="fa-solid fa-upload"></i>${t('restore')}<input type="file" id="restore" accept="application/json" hidden></label>
+  <button type="button" class="btn sm" data-act="seed">${t('resetD')}</button><button type="button" class="btn sm r" data-act="wipe">${t('clearD')}</button></span>
+  <span class="row"><button type="button" class="btn" data-act="closem">${t('cancel')}</button><button class="btn g" type="submit">${t('save')}</button></span></div></form>`,true);
+  $('#frm').onsubmit=async e=>{e.preventDefault();const fd=new FormData(e.target);state.profile={name:fd.get('name').trim(),reg:fd.get('reg').trim(),farm:fd.get('farm').trim()};await save();closeModal();render();toast(t('saved'))};
+  $('#restore').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(!d.houses||!d.samples)throw 0;state=d;ui.lang=d.settings?.lang||'id';ui.dark=!!d.settings?.dark;await save();closeModal();render();toast(t('saved'))}catch(_){toast(t('badFile'))}};r.readAsText(f)};
+}
+
+function openPopEditModal() {
+  openModal(`
+    <h3><i class="fa-solid fa-warehouse" style="margin-right:8px;color:var(--g6)"></i>Edit Populasi Awal & Tanggal Acuan Umur</h3>
+    <form id="popEditFrm">
+      <div class="grid" style="gap:12px;max-height:60vh;overflow-y:auto;padding-right:4px">
+        ${state.houses.map(h => `
+          <div class="card" style="padding:12px;background:var(--soft)">
+            <b style="display:block;margin-bottom:8px;font-size:15px">Kandang ${h.id}</b>
+            <div class="fg">
+              <label class="fl full" style="margin-bottom:4px">Tanggal Acuan Mulainya Umur & Populasi
+                <input class="inp" type="date" name="baseStartDate_${h.id}" value="${h.baseStartDate || '2026-04-10'}" required>
+                <small class="muted" style="font-size:11px;font-weight:400;margin-top:2px">Sistem akan menyesuaikan umur harian flok dengan menghitung selisih hari dari tanggal ini.</small>
+              </label>
+              <label class="fl full" style="margin-bottom:6px">Umur pada Tanggal Acuan (Minggu+Hari)
+                <input class="inp" type="text" name="baseAge_${h.id}" value="${h.baseAge || '21+0'}" placeholder="e.g. 7+5" required>
+              </label>
+              <label class="fl">Populasi Awal Jantan (♂)
+                <input class="inp" type="number" min="0" name="initMales_${h.id}" value="${h.initMales !== undefined ? h.initMales : Math.round(h.pop * 0.10)}" required>
+              </label>
+              <label class="fl">Populasi Awal Betina (♀)
+                <input class="inp" type="number" min="0" name="initFemales_${h.id}" value="${h.initFemales !== undefined ? h.initFemales : (h.pop - Math.round(h.pop * 0.10))}" required>
+              </label>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="err" id="popErr" role="alert"></div>
+      <div class="acts">
+        <button type="button" class="btn" data-act="closem">${t('cancel')}</button>
+        <button class="btn g" type="submit">${t('save')}</button>
+      </div>
+    </form>
+  `, true);
+
+  $('#popEditFrm').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    state.houses.forEach(h => {
+      const bStart = fd.get(`baseStartDate_${h.id}`);
+      const bAge = fd.get(`baseAge_${h.id}`);
+      const m = parseInt(fd.get(`initMales_${h.id}`), 10) || 0;
+      const f = parseInt(fd.get(`initFemales_${h.id}`), 10) || 0;
+      
+      const parsedAge = parseAgeToDays(bAge);
+      if(!parsedAge.valid){
+        $('#popErr').textContent = `Format umur Kandang ${h.id} tidak valid. Gunakan format Minggu+Hari (contoh: 7+5).`;
+        return; 
+      }
+
+      h.baseStartDate = bStart;
+      h.baseAge = bAge;
+      h.initMales = m;
+      h.initFemales = f;
+      h.pop = m + f;
+    });
+
+    if($('#popErr').textContent) return;
+
+    await save();
+    closeModal();
+    render();
+    toast('Data populasi awal dan acuan umur berhasil diperbarui.');
+  };
+}
+
+function openDailyProductionModal(editRecord = null) {
+  const isEdit = !!editRecord;
+  const initHouse = editRecord ? editRecord.house : (ui.house === 'all' ? 1 : +ui.house);
+  const livePop = getHouseLivePopulation(initHouse, editRecord ? editRecord.date : today());
+
+  openModal(`
+    <h3><i class="fa-solid fa-clipboard-list" style="margin-right:8px;color:var(--g6)"></i>${isEdit ? 'Edit Catatan Produksi' : 'Input Produksi Harian'}</h3>
+    <form id="dailyProdFrm" novalidate>
+      <div class="fg">
+        <label class="fl">Tanggal Log<input class="inp" type="date" name="date" id="dpDate" value="${editRecord ? editRecord.date : today()}" required></label>
+        <label class="fl">${t('house')}
+          <select class="sel" name="house" id="dpHouseSel">
+            ${state.houses.map(h => `<option value="${h.id}" ${h.id === initHouse ? 'selected' : ''}>${t('house')} ${h.id}</option>`).join('')}
+          </select>
+        </label>
+        <div class="full" style="background:var(--g-soft);padding:10px 14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--g7)">Populasi Hidup Tersedia:</span>
+          <b id="dpLivePopText" style="font-size:15px">${n0(livePop.total)} ekor (♂ ${n0(livePop.males)} · ♀ ${n0(livePop.females)})</b>
+        </div>
+        <label class="fl full">Jumlah Produksi Telur (Butir)<input class="inp" type="number" min="0" name="intactEggs" value="${editRecord ? (editRecord.intactEggs + (editRecord.brokenEggs||0) + (editRecord.freeEggs||0)) : ''}" placeholder="Total telur harian" required></label>
+        
+        <label class="fl">Mati Alami Jantan (♂)<input class="inp" type="number" min="0" name="maleMortality" id="dpMaleMort" value="${editRecord ? editRecord.maleMortality : 0}" required></label>
+        <label class="fl">Mati Alami Betina (♀)<input class="inp" type="number" min="0" name="femaleMortality" id="dpFemaleMort" value="${editRecord ? editRecord.femaleMortality : 0}" required></label>
+        <label class="fl">Culling Jantan (♂)<input class="inp" type="number" min="0" name="maleCulls" id="dpMaleCulls" value="${editRecord && editRecord.maleCulls !== undefined ? editRecord.maleCulls : ''}"></label>
+        <label class="fl">Culling Betina (♀)<input class="inp" type="number" min="0" name="femaleCulls" id="dpFemaleCulls" value="${editRecord && editRecord.femaleCulls !== undefined ? editRecord.femaleCulls : ''}"></label>
+        
+        <label class="fl">Total Pengurangan (Read-Only)<input class="inp" type="number" name="totalMortality" id="dpTotalMort" value="${editRecord ? ((editRecord.maleMortality||0) + (editRecord.femaleMortality||0) + (editRecord.maleCulls||0) + (editRecord.femaleCulls||0)) : 0}" readonly style="background:var(--soft);font-weight:800"></label>
+        <label class="fl">Total Necropsy (Pemeriksaan)<input class="inp" type="number" min="0" name="totalNecropsy" id="dpNecropsy" value="${editRecord ? (editRecord.totalNecropsy || 0) : 0}" required></label>
+        
+        <label class="fl full">Catatan Tambahan<textarea class="inp" name="notes" placeholder="Kondisi pakan, suhu...">${editRecord ? esc(editRecord.notes || '') : ''}</textarea></label>
+      </div>
+      <div class="err" id="dpErr" role="alert"></div>
+      <div class="acts">
+        <button type="button" class="btn" data-act="closem">${t('cancel')}</button>
+        <button class="btn g" type="submit">${t('save')}</button>
+      </div>
+    </form>
+  `, true);
+
+  const hSel = $('#dpHouseSel');
+  const dSel = $('#dpDate');
+  const mMortInp = $('#dpMaleMort');
+  const fMortInp = $('#dpFemaleMort');
+  const mCullInp = $('#dpMaleCulls');
+  const fCullInp = $('#dpFemaleCulls');
+  const totMortInp = $('#dpTotalMort');
+  const necInp = $('#dpNecropsy');
+
+  const updatePopDisplay = () => {
+    const hid = +hSel.value;
+    const dt = dSel.value;
+    const pop = getHouseLivePopulation(hid, dt);
+    const livePopText = $('#dpLivePopText');
+    if (livePopText) livePopText.textContent = `${n0(pop.total)} ekor (♂ ${n0(pop.males)} · ♀ ${n0(pop.females)})`;
+    return pop;
+  };
+
+  const calcTotalMort = () => {
+    const m = parseInt(mMortInp.value, 10) || 0;
+    const f = parseInt(fMortInp.value, 10) || 0;
+    const mc = parseInt(mCullInp.value, 10) || 0;
+    const fc = parseInt(fCullInp.value, 10) || 0;
+    const tot = m + f + mc + fc;
+    totMortInp.value = tot;
+    return tot;
+  };
+
+  if (hSel) hSel.onchange = updatePopDisplay;
+  if (dSel) dSel.onchange = updatePopDisplay;
+  if (mMortInp) mMortInp.oninput = calcTotalMort;
+  if (fMortInp) fMortInp.oninput = calcTotalMort;
+  if (mCullInp) mCullInp.oninput = calcTotalMort;
+  if (fCullInp) fCullInp.oninput = calcTotalMort;
+
+  $('#dailyProdFrm').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const houseId = +fd.get('house'), dt = fd.get('date');
+    const intact = +fd.get('intactEggs') || 0;
+    const broken = 0; 
+    const free = 0;
+    const fMort = +fd.get('femaleMortality') || 0, mMort = +fd.get('maleMortality') || 0;
+    const fCulls = +fd.get('femaleCulls') || 0, mCulls = +fd.get('maleCulls') || 0;
+    const totNec = +fd.get('totalNecropsy') || 0;
+    const totalMort = fMort + mMort;
+    
+    const pop = getHouseLivePopulation(houseId, dt);
+    if ((mMort + mCulls) > (pop.males + (editRecord ? ((editRecord.maleMortality||0) + (editRecord.maleCulls||0)) : 0))) {
+      $('#dpErr').textContent = `Pengurangan jantan melebihi populasi jantan tersisa.`;
+      return;
+    }
+    if ((fMort + fCulls) > (pop.females + (editRecord ? ((editRecord.femaleMortality||0) + (editRecord.femaleCulls||0)) : 0))) {
+      $('#dpErr').textContent = `Pengurangan betina melebihi populasi betina tersisa.`;
+      return;
+    }
+    if (totNec > totalMort) {
+      $('#dpErr').textContent = `Total necropsy (${totNec}) tidak boleh melebihi total mati alami (${totalMort}).`;
+      return;
+    }
+
+    const livePop = pop.total || 20000;
+    const hdVal = livePop > 0 ? +(((intact + broken) / livePop) * 100).toFixed(1) : 0;
+
+    const entry = {
+      id: editRecord ? editRecord.id : uid(), date: dt, house: houseId,
+      intactEggs: intact, brokenEggs: broken, freeEggs: free,
+      femaleMortality: fMort, maleMortality: mMort, 
+      femaleCulls: fCulls, maleCulls: mCulls,
+      totalNecropsy: totNec,
+      notes: fd.get('notes').trim()
+    };
+
+    if (editRecord) {
+      const idx = state.dailyEntryLogs.findIndex(x => x.id === editRecord.id);
+      if (idx >= 0) state.dailyEntryLogs[idx] = entry;
+    } else {
+      state.dailyEntryLogs.push(entry);
+    }
+
+    const mIdx = state.mortalityLogs.findIndex(x => x.date === dt && x.house === houseId);
+    const mObj = { 
+      id: mIdx >= 0 ? state.mortalityLogs[mIdx].id : uid(), 
+      date: dt, house: houseId, 
+      natural: totalMort, culls: mCulls + fCulls, 
+      femaleMortality: fMort, maleMortality: mMort, 
+      cause: 'disease' 
+    };
+    if (mIdx >= 0) state.mortalityLogs[mIdx] = mObj; else state.mortalityLogs.push(mObj);
+
+    const pIdx = state.productionLogs.findIndex(x => x.date === dt && x.house === houseId);
+    if (pIdx >= 0) state.productionLogs[pIdx].hd = hdVal; else state.productionLogs.push({ date: dt, house: houseId, hd: hdVal });
+
+    if (!editRecord && totNec > 0) {
+      state.necropsyRecords.push({
+        id: uid(), date: dt, house: houseId, age: 25, qty: totNec, sex: 'female',
+        lesions: 'Pemeriksaan rutin harian dari catatan produksi', system: 'resp',
+        diagnosis: 'Pemeriksaan Rutin / Necropsy Harian', reco: 'Evaluasi lanjutan jika lesi positif'
+      });
+    }
+
+    await save(); closeModal(); render(); toast(t('saved'));
+  };
+}
+
+function openNecropsyView(id) {
+  const r = state.necropsyRecords.find(x => x.id === id);
+  if (!r) return;
+  const imgs = (r.images || []).map(src => `<img src="${src}" style="width:100%;border-radius:8px;margin-bottom:8px;cursor:pointer;border:1px solid var(--border)" onclick="openImageViewer('${src}')" title="Perbesar">`).join('');
+  
+  openModal(`
+    <h3><i class="fa-solid fa-file-medical" style="color:var(--r6);margin-right:8px"></i>Detail Catatan Nekropsi</h3>
+    <div class="fg" style="font-size:13.5px;line-height:1.6">
+      <div class="full" style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:8px">
+        <span><b>Tanggal:</b> ${fD(r.date)}</span>
+        <span class="pill p-s">Umur: ${r.age} mgg</span>
+      </div>
+      <div><b>Kandang:</b> ${r.house}</div>
+      <div><b>Sex:</b> ${r.sex === 'male' ? 'Jantan (♂)' : 'Betina (♀)'}</div>
+      <div><b>Jumlah Diperiksa:</b> ${r.qty} ekor</div>
+      <div><b>Sistem Terdampak:</b> <span class="pill p-r">${t('sy_'+r.system)}</span></div>
+      
+      <div class="full" style="background:var(--soft);padding:10px 14px;border-radius:10px;margin-top:4px">
+        <b style="display:block;margin-bottom:4px;color:var(--text)">Diagnosis Sementara:</b>
+        <span style="font-size:15px;font-weight:700;color:var(--r6)">${esc(r.diagnosis || '—')}</span>
+      </div>
+      
+      <div class="full">
+        <b style="display:block;margin-bottom:4px">Lesi Organ (Gross):</b>
+        <div style="background:var(--bg);border:1px solid var(--border);padding:10px;border-radius:8px">${esc(r.lesions)}</div>
+      </div>
+      
+      <div class="full">
+        <b style="display:block;margin-bottom:4px">Rekomendasi Dokter:</b>
+        <div style="background:var(--bg);border:1px solid var(--border);padding:10px;border-radius:8px">${esc(r.reco || '—')}</div>
+      </div>
+
+      ${imgs ? `
+      <div class="full" style="margin-top:8px">
+        <b style="display:block;margin-bottom:8px"><i class="fa-solid fa-images" style="margin-right:6px"></i>Foto Lampiran (${r.images.length}):</b>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">${imgs}</div>
+      </div>` : ''}
+    </div>
+    <div class="acts" style="margin-top:20px">
+      <button class="btn" data-act="closem">Tutup</button>
+    </div>
+  `, true);
+}
+
+
+/* ================= views ================= */
+const head=(title,sub,acts='')=>`<div class="ph"><div><h1>${title}</h1><p>${sub}</p></div><div class="row noprint">${acts}</div></div>`;
+const empty=()=>`<div class="empty"><i class="fa-regular fa-folder-open" style="font-size:26px"></i><p>${t('noData')}</p></div>`;
+
+const rowActs=(col,id)=>`
+  <button class="ic" data-act="edit" data-col="${col}" data-id="${id}" aria-label="${t('edit')}"><i class="fa-solid fa-pen"></i></button>
+  <button class="ic del" data-act="del" data-col="${col}" data-id="${id}" aria-label="${t('del')}"><i class="fa-solid fa-trash"></i></button>
+`;
+
+function medsForMatrixToday(m, hs) {
+  const out = [];
+  if (!m) return out;
+  const d = todayIdx();
+  hs.forEach(h => {
+    const sl = (m.cells[h.id - 1]?.[d] || []).filter(s => s.drug);
+    if (sl.length) out.push({ h: h.id, sl });
+  });
+  return out;
+}
+
+const houseScopeCard=()=>{
+  const all=ui.house==='all';
+  const themeClass = all ? 'h-theme-all' : `h-theme-${ui.house}`;
+  const houseAge = !all ? getHouseCurrentAge(+ui.house) : '';
+  return `<div class="dd" id="hdd" style="flex:1">
+    <button type="button" class="house-card-btn ${themeClass}" data-act="ddtoggle" aria-haspopup="true" aria-expanded="false" aria-label="${t('house')}">
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-solid fa-warehouse" style="font-size:20px"></i>
+        <div class="h-info"><b>${all ? t('allH') : `${t('house')} ${ui.house}`}</b></div>
+      </div>
+      ${!all ? `<div class="h-age"><b>${houseAge}</b></div>` : ''}
+    </button>
+    <div class="dd-menu" hidden>
+      <button type="button" class="dd-all${all?' on':''}" data-act="ddpick" data-v="all"><i class="fa-solid fa-layer-group"></i>${t('allH')}</button>
+      <div class="dd-grid">
+        ${state.houses.map(h => `<button type="button" class="dd-item${String(ui.house)===String(h.id)?' on':''}" data-act="ddpick" data-v="${h.id}"><b>${t('house')} ${h.id}</b><small>${n0(getHouseLivePopulation(h.id).total)}</small></button>`).join('')}
+      </div>
+    </div>
+  </div>`;
+};
+
+const closeDD=()=>document.querySelectorAll('.dd-menu').forEach(m=>{m.hidden=true;m.previousElementSibling.setAttribute('aria-expanded','false')});
+
+function vDash(){
+  const hs=HS(),pop=popOf(hs),hd=lastHD(hs),bw=femaleBwLatest(hs),soon=pendingSoon();
+  const wMort = getFlockWeeklyMortality(hs);
+  const m=activeMatrix();
+  const meds=m?medsForMatrixToday(m, hs):[];
+  
+  const alertHTML = (!ui.dismissAlert && soon.length) ? `
+    <div class="alert">
+      <i class="fa-solid fa-bell"></i>
+      <div class="tx">
+        <b>${t('alertT')}</b>
+        <ul>${soon.slice(0,3).map(s=>{const d=diffDays(today(),s.date);return`<li>${t('house')} ${s.house} · ${t('t_'+s.type)} · ${esc(s.purpose||'—')} · ${fS(s.date)} (${d<0?t('overdue'):d===0?t('today'):'H+'+d})</li>`}).join('')}</ul>
+      </div>
+      <button class="btn s" data-act="nav" data-v="samples">${t('alertBtn')}</button>
+      <button type="button" class="close-alert" id="closealertbtn" aria-label="Tutup Peringatan"><i class="fa-solid fa-xmark"></i></button>
+    </div>` : '';
+
+  const dtInfo = getFormattedDateTime();
+  const sexData = getSexRatioData(hs);
+  
+  // Female Mortality Trend points change
+  const diffFemaleMort = wMort.femalePct - wMort.prevFemalePct;
+  const isUpF = diffFemaleMort > 0.001, isDownF = diffFemaleMort < -0.001;
+  const trendArrowHTML = isUpF ? `<span class="trend-pill up-bad"><i class="fa-solid fa-arrow-trend-up"></i> +${nd(diffFemaleMort,2)} pp</span>` : (isDownF ? `<span class="trend-pill down-good"><i class="fa-solid fa-arrow-trend-down"></i> ${nd(diffFemaleMort,2)} pp</span>` : '');
+
+  // HDP Daily change calculation & reference target
+  const dates = [...new Set(state.productionLogs.map(x => x.date))].sort();
+  const todayDate = today();
+  const prevDate = dates[dates.length - 2] || addDays(todayDate, -1);
+  const todayHd = hdOn(todayDate, hs);
+  const prevHd = hdOn(prevDate, hs);
+  let hdpTrendInline = '';
+  if (todayHd !== null && prevHd !== null) {
+    const diffPp = todayHd - prevHd;
+    const arrow = diffPp > 0.001 ? '▲' : (diffPp < -0.001 ? '▼' : '▬');
+    const pillClass = diffPp > 0.001 ? 'up-good' : (diffPp < -0.001 ? 'up-bad' : 'down-good');
+    hdpTrendInline = `<span class="trend-pill ${pillClass}">${arrow} ${diffPp > 0 ? '+' : ''}${nd(diffPp, 2)} pp</span>`;
+  }
+
+  // Reference Target HDP and Weekly Gain Target dynamically fetched
+  const sampleHouse = hs[0] || state.houses[0];
+  const curAgeStr = getHouseCurrentAge(sampleHouse.id, todayDate);
+  const curAgeParsed = parseAgeToDays(curAgeStr);
+  const curWeek = Math.max(1, Math.min(65, curAgeParsed.w));
+  const hdpTargetRef = getReferenceTarget(curWeek, 'hdp');
+  const refGainTarget = getReferenceTarget(curWeek, 'femaleWeeklyGain');
+
+  // Female Body Weight Weekly Gain vs Target
+  let actualWeeklyGain = bw ? bw.actualWeeklyGain : 120;
+  const gainDiff = actualWeeklyGain - refGainTarget;
+  const gainPillClass = gainDiff >= 0 ? 'up-good' : 'up-bad';
+  const gainArrow = gainDiff >= 0 ? '▲' : '▼';
+  const bwTrendInline = `<span class="trend-pill ${gainPillClass}">${gainArrow} ${actualWeeklyGain >= 0 ? '+' : ''}${actualWeeklyGain} g/wk</span>`;
+
+  return head(t('dash'), `${ui.house==='all'?t('allH'):t('house')+' '+ui.house}`) + alertHTML + `
+  <div class="dash-top-bar">
+    ${houseScopeCard()}
+    <div class="date-badge">
+      <div class="icon-box"><i class="fa-regular fa-calendar-days"></i></div>
+      <div class="dt-info"><span class="dt-day">${dtInfo.dayStr}, ${dtInfo.fullDate}</span><span class="dt-sub"><i class="fa-regular fa-clock" style="margin-right:4px"></i>${dtInfo.timeStr}</span></div>
+    </div>
+  </div>
+
+  <div class="grid kpis">
+   <div class="card kpi"><div class="ico c-g"><i class="fa-solid fa-feather"></i></div><div><div class="l">${t('kPop')}</div><div class="n">${n0(pop)}</div><div class="d">♂ ${n0(sexData.males)} · ♀ ${n0(sexData.females)} ekor</div></div><button class="ic edit noprint" data-act="pop" aria-label="${t('popEdit')}"><i class="fa-solid fa-pen"></i></button></div>
+   
+   <div class="card kpi"><div class="ico c-s"><i class="fa-solid fa-egg"></i></div><div><div class="l">${t('kEgg')} (Harian)</div><div class="n">${hd===null?'—':nd(hd)+'%'}${hdpTrendInline}</div><div class="d">Target: <b>${nd(hdpTargetRef)}%</b></div></div></div>
+
+   <div class="card kpi"><div class="ico c-r"><i class="fa-solid fa-heart-crack"></i></div><div><div class="l">Mortalitas Mingguan Betina (♀)</div><div class="n" style="display:flex;align-items:center">${nd(wMort.femalePct, 2)}% ${trendArrowHTML}</div><div class="d">Jantan (♂): ${nd(wMort.malePct, 2)}% | Total: ${nd(wMort.totalPct, 2)}%</div></div></div>
+
+   <div class="card kpi"><div class="ico c-a"><i class="fa-solid fa-weight-scale"></i></div><div><div class="l">${t('kBW')}</div><div class="n">${bw ? n0(bw.mean)+' g' : '—'}${bwTrendInline}</div><div class="d">${bw ? `Unif: ${nd(bw.unif)}% · CV: ${nd(bw.cv)}%` : 'Belum ada sampling'}</div></div></div>
+
+   <div class="card kpi"><div class="ico c-p"><i class="fa-solid fa-venus-mars"></i></div><div><div class="l">${t('kSex')}</div><div class="n">${sexData.ratio}</div><div class="d">♂ ${n0(sexData.males)} · ♀ ${n0(sexData.females)}</div></div></div>
+  </div>
+  
+  <div class="grid two" style="margin-bottom:16px">
+   <div class="card">
+     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+       <h2 style="margin:0"><i class="fa-solid fa-chart-line"></i>Produksi Telur vs Mortalitas</h2>
+       <div class="seg pill-style" role="group" aria-label="Pilih rentang waktu">
+         <button data-act="setchartdays" data-v="7" class="${ui.chartDays===7?'on':''}">7 Hari</button>
+         <button data-act="setchartdays" data-v="30" class="${ui.chartDays===30?'on':''}">1 Bulan</button>
+         <button data-act="setchartdays" data-v="90" class="${ui.chartDays===90?'on':''}">3 Bulan</button>
+       </div>
+     </div>
+     <div class="chart"><canvas id="cA" role="img" aria-label="Produksi Telur vs Mortalitas"></canvas></div>
+   </div>
+   <div class="card"><h2><i class="fa-solid fa-lungs"></i>${t('chartB')}</h2><div class="chart"><canvas id="cB" role="img" aria-label="${t('chartB')}"></canvas></div></div>
+  </div>`;
+}
+
+function vProdInput() {
+  let totalMalePop = 0;
+  let totalFemalePop = 0;
+  state.houses.forEach(h => {
+    const p = getHouseLivePopulation(h.id);
+    totalMalePop += p.males;
+    totalFemalePop += p.females;
+  });
+  const totalFarmPop = totalMalePop + totalFemalePop;
+
+  const targetDate = today();
+
+  let filteredLogs = state.dailyEntryLogs.slice();
+  if (ui.prodHouseFilter.length < 9) {
+    filteredLogs = filteredLogs.filter(l => ui.prodHouseFilter.includes(l.house));
+  }
+  filteredLogs.sort((a,b) => b.date.localeCompare(a.date) || b.house - a.house);
+
+  const totalRows = filteredLogs.length;
+  const rowsPerPage = ui.prodRowsPerPage;
+  const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
+  if (ui.prodCurrentPage > totalPages) ui.prodCurrentPage = totalPages;
+  const startIndex = (ui.prodCurrentPage - 1) * rowsPerPage;
+  const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
+  const paginatedLogs = filteredLogs.slice(startIndex, endIndex);
+
+  const rowsHTML = paginatedLogs.map(l => {
+    const totalEggs = (l.intactEggs || 0) + (l.brokenEggs || 0); 
+    const livePop = getHouseLivePopulation(l.house, l.date).total;
+    const hd = livePop > 0 ? ((totalEggs / livePop) * 100).toFixed(1) : '0';
+    const totMortAndCull = (l.maleMortality || 0) + (l.femaleMortality || 0) + (l.maleCulls || 0) + (l.femaleCulls || 0);
+    const logAge = getHouseCurrentAge(l.house, l.date);
+    return `<tr>
+      <td>${fD(l.date)}</td>
+      <td><span class="pill p-x" style="background:var(--soft);color:var(--text)">${logAge}</span></td>
+      ${ui.prodHouseFilter.length > 1 ? `<td><b>Kandang ${l.house}</b></td>` : ''}
+      <td class="n"><b>${n0(totalEggs)}</b></td>
+      <td class="n">${hd}%</td>
+      <td class="n">${l.maleMortality || 0}</td>
+      <td class="n">${l.femaleMortality || 0}</td>
+      <td class="n">${l.maleCulls || 0}</td>
+      <td class="n">${l.femaleCulls || 0}</td>
+      <td class="n"><b style="color:var(--r6)">${totMortAndCull}</b></td>
+      <td class="n"><b>${l.totalNecropsy || 0}</b></td>
+      <td><span class="muted small">${esc(l.notes || '—')}</span></td>
+      <td style="white-space:nowrap">${rowActs('dailyEntryLogs', l.id)}</td>
+    </tr>`;
+  }).join('');
+
+  return head('Input Produksi Harian', 'Pusat pencatatan harian populasi, mortalitas, nekropsi, dan produksi telur',
+    `<button class="btn s" data-act="openrefmod" style="background:var(--s6);color:#fff"><i class="fa-solid fa-book"></i> Production Reference Module</button>
+     <button class="btn g" data-act="adddailyprod"><i class="fa-solid fa-plus"></i> Input Produksi Baru</button>`) +
+  
+  `<div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(14,165,233,.08));border:1.5px solid var(--g5)">
+     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+       <div>
+         <h2 style="font-size:18px;margin-bottom:2px"><i class="fa-solid fa-chart-pie" style="color:var(--g6)"></i> Total Farm Population</h2>
+       <p class="muted" style="font-size:12.5px">Ringkasan populasi hidup dan mortalitas harian seluruh 9 kandang</p>
+     </div>
+     <button class="btn s" data-act="editpop"><i class="fa-solid fa-pen-to-square"></i> Tanggal Acuan & Populasi Awal</button>
+   </div>
+   <div class="grid kpis" style="margin-bottom:0">
+       <div class="card kpi" style="background:var(--glass)">
+         <div class="ico c-g"><i class="fa-solid fa-feather-pointed"></i></div>
+         <div>
+           <div class="l">Total Farm Population</div>
+           <div class="n">${n0(totalFarmPop)} <span style="font-size:13px;font-weight:600" class="muted">ekor</span></div>
+           <div class="d">♂ ${n0(totalMalePop)} · ♀ ${n0(totalFemalePop)}</div>
+         </div>
+       </div>
+       <div class="card kpi" style="background:var(--glass)">
+         <div class="ico c-s"><i class="fa-solid fa-mars"></i></div>
+         <div>
+           <div class="l">Total Male Population (♂)</div>
+           <div class="n">${n0(totalMalePop)} <span style="font-size:13px;font-weight:600" class="muted">ekor</span></div>
+           <div class="d">Akumulasi 9 Kandang</div>
+         </div>
+       </div>
+       <div class="card kpi" style="background:var(--glass)">
+         <div class="ico c-p"><i class="fa-solid fa-venus"></i></div>
+         <div>
+           <div class="l">Total Female Population (♀)</div>
+           <div class="n">${n0(totalFemalePop)} <span style="font-size:13px;font-weight:600" class="muted">ekor</span></div>
+           <div class="d">Akumulasi 9 Kandang</div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="grid kpis" style="margin-bottom:20px">
+     ${state.houses.map(h => {
+       const p = getHouseLivePopulation(h.id, targetDate);
+       const todayLogs = state.dailyEntryLogs.filter(l => l.house === h.id && l.date === targetDate);
+       const mMortToday = sum(todayLogs, l => l.maleMortality || 0);
+       const fMortToday = sum(todayLogs, l => l.femaleMortality || 0);
+       const mCullToday = sum(todayLogs, l => l.maleCulls || 0);
+       const fCullToday = sum(todayLogs, l => l.femaleCulls || 0);
+       const totMortToday = mMortToday + fMortToday + mCullToday + fCullToday;
+       return `<div class="card" style="padding:14px;background:var(--glass)">
+         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+           <b style="font-size:14px">Kandang ${h.id}</b>
+           <span class="pill p-s">${getHouseCurrentAge(h.id, targetDate)} Mgg</span>
+         </div>
+         <div style="display:flex;flex-direction:column;gap:3px;font-size:12.5px;margin-bottom:8px">
+           <div><b>Total Pop:</b> ${n0(p.total)} ekor</div>
+           <div class="muted">♂ ${n0(p.males)} · ♀ ${n0(p.females)}</div>
+         </div>
+         <div style="border-top:1px dashed var(--border);padding-top:6px;font-size:12px;color:var(--muted)">
+           <div>Pengurangan Hari Ini:</div>
+           <div><b>♂ ${mMortToday+mCullToday}</b> · <b>♀ ${fMortToday+fCullToday}</b> · <span style="color:var(--r6)">Tot: ${totMortToday}</span></div>
+         </div>
+       </div>`;
+     }).join('')}
+   </div>
+
+   <div class="card">
+     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+       <h2><i class="fa-solid fa-table-list"></i> Riwayat Input Produksi Harian</h2>
+       <div class="row" style="gap:12px;flex-wrap:wrap">
+         <div style="display:flex;align-items:center;gap:8px">
+           <span style="font-size:12px;font-weight:700">Filter Kandang:</span>
+           ${renderHouseCBs('prodHouseFilter')}
+         </div>
+         <label class="row" style="gap:6px;font-size:12.5px;font-weight:700">Rows per page:
+           <select class="sel" id="prodRowsSel" style="width:auto">
+             ${[10, 20, 50, 100].map(n => `<option value="${n}" ${ui.prodRowsPerPage === n ? 'selected' : ''}>${n}</option>`).join('')}
+           </select>
+         </label>
+       </div>
+     </div>
+
+     ${filteredLogs.length ? `
+       <div class="tw"><table>
+         <thead>
+           <tr>
+             <th>${t('date')}</th>
+             <th>Umur (Mgg)</th>
+             ${ui.prodHouseFilter.length > 1 ? `<th>Kandang</th>` : ''}
+             <th class="n">Jml. Telur</th>
+             <th class="n">Hen-Day</th>
+             <th class="n">Mati ♂</th>
+             <th class="n">Mati ♀</th>
+             <th class="n">Culling ♂</th>
+             <th class="n">Culling ♀</th>
+             <th class="n">Tot. Mati & Afkir</th>
+             <th class="n">Necropsy</th>
+             <th>Catatan</th>
+             <th>${t('actions')}</th>
+           </tr>
+         </thead>
+         <tbody>${rowsHTML}</tbody>
+       </table></div>
+       
+       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;font-size:13px">
+         <span class="muted">Showing ${totalRows > 0 ? startIndex + 1 : 0}–${endIndex} of ${totalRows} entries</span>
+         <div class="row" style="gap:6px">
+           <button class="btn sm" id="prodPrevBtn" ${ui.prodCurrentPage <= 1 ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>Previous</button>
+           <span style="font-weight:700;padding:0 6px">Page ${ui.prodCurrentPage} of ${totalPages}</span>
+           <button class="btn sm" id="prodNextBtn" ${ui.prodCurrentPage >= totalPages ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>Next</button>
+         </div>
+       </div>
+     ` : empty()}
+   </div>`;
+}
+
+function vProductionReferenceModule() {
+  const refData = state.productionReference || getDefaultReferenceTable();
+  return head(t('refmod'), 'Pusat acuan target produksi mingguan umur 1 sampai 65 minggu untuk seluruh parameter operasional',
+    `<button class="btn" data-act="refmodcancel"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+     <button class="btn s" id="refEditBtn" data-act="refmodedit"><i class="fa-solid fa-pen-to-square"></i> Edit Module</button>
+     <button class="btn g" id="refSaveBtn" data-act="refmodsave" style="display:none"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>`) +
+  `<div class="card">
+     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+       <h2><i class="fa-solid fa-book-open"></i> Tabel Master Acuan Produksi (Minggu 1 – 65)</h2>
+       <span class="muted small">Mode Default: Read-Only untuk mencegah perubahan tidak disengaja. Klik 'Edit Module' untuk mengubah nilai acuan.</span>
+     </div>
+     <div class="tw" style="max-height:70vh;overflow-y:auto">
+       <table class="mx" id="refTable">
+         <thead>
+           <tr>
+             <th class="h" style="position:sticky;left:0;z-index:3">Age (Week)</th>
+             <th class="n">Male BW (g)</th>
+             <th class="n">Female BW (g)</th>
+             <th class="n">Male Mort (%)</th>
+             <th class="n">Female Mort (%)</th>
+             <th class="n">HDP Target (%)</th>
+             <th class="n">Hatching Target (%)</th>
+             <th class="n">Sex Ratio</th>
+             <th class="n">Uniformity (%)</th>
+             <th class="n">CV (%)</th>
+             <th class="n">Male Weekly Gain (g)</th>
+             <th class="n">Female Weekly Gain (g)</th>
+             <th class="n">Male Point Feed (g)</th>
+             <th class="n">Female Point Feed (g)</th>
+             <th class="n">Egg Weight (g)</th>
+           </tr>
+         </thead>
+         <tbody>
+           ${Array.from({length: 65}, (_, i) => i + 1).map(w => {
+             const r = refData[w] || getDefaultReferenceTable()[w];
+             return `<tr>
+               <td class="h" style="position:sticky;left:0;z-index:2"><b>Minggu ${w}</b></td>
+               <td class="n"><span class="ref-view">${r.maleBw}</span><input class="inp ref-edit" type="number" data-w="${w}" data-k="maleBw" value="${r.maleBw}" style="display:none;width:80px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.femaleBw}</span><input class="inp ref-edit" type="number" data-w="${w}" data-k="femaleBw" value="${r.femaleBw}" style="display:none;width:80px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.maleMort}</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="maleMort" value="${r.maleMort}" style="display:none;width:70px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.femaleMort}</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="femaleMort" value="${r.femaleMort}" style="display:none;width:70px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.hdp}%</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="hdp" value="${r.hdp}" style="display:none;width:70px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.hatching}%</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="hatching" value="${r.hatching}" style="display:none;width:70px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.sexRatio}</span><input class="inp ref-edit" type="text" data-w="${w}" data-k="sexRatio" value="${r.sexRatio}" style="display:none;width:85px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.uniformity}%</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="uniformity" value="${r.uniformity}" style="display:none;width:70px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.cv}%</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="cv" value="${r.cv}" style="display:none;width:70px;text-align:right"></td>
+               <td class="n"><span class="ref-view">+${r.maleWeeklyGain}g</span><input class="inp ref-edit" type="number" data-w="${w}" data-k="maleWeeklyGain" value="${r.maleWeeklyGain}" style="display:none;width:75px;text-align:right"></td>
+               <td class="n"><span class="ref-view">+${r.femaleWeeklyGain}g</span><input class="inp ref-edit" type="number" data-w="${w}" data-k="femaleWeeklyGain" value="${r.femaleWeeklyGain}" style="display:none;width:75px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.malePointFeed}</span><input class="inp ref-edit" type="number" data-w="${w}" data-k="malePointFeed" value="${r.malePointFeed}" style="display:none;width:75px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.femalePointFeed}</span><input class="inp ref-edit" type="number" data-w="${w}" data-k="femalePointFeed" value="${r.femalePointFeed}" style="display:none;width:75px;text-align:right"></td>
+               <td class="n"><span class="ref-view">${r.eggWeight}g</span><input class="inp ref-edit" type="number" step="any" data-w="${w}" data-k="eggWeight" value="${r.eggWeight}" style="display:none;width:75px;text-align:right"></td>
+             </tr>`;
+           }).join('')}
+         </tbody>
+       </table>
+     </div>
+   </div>`;
+}
+
+function vSamples(){
+  let list = state.samples.slice();
+  if (ui.sampHouseFilter.length < 9) {
+    list = list.filter(s => ui.sampHouseFilter.includes(s.house));
+  }
+  list.sort((a,b) => b.date.localeCompare(a.date));
+
+  const totalRows = list.length;
+  const rowsPerPage = ui.sampRowsPerPage;
+  const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
+  if (ui.sampCurrentPage > totalPages) ui.sampCurrentPage = totalPages;
+  const startIndex = (ui.sampCurrentPage - 1) * rowsPerPage;
+  const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
+  const paginatedList = list.slice(startIndex, endIndex);
+
+  const diagHouse = ui.diagHouse || 'all';
+  const serumSamples = state.samples.filter(s => s.type === 'serum' && (diagHouse === 'all' || s.house === +diagHouse));
+  const antigenMap = {};
+  serumSamples.forEach(s => {
+    if (s.antigens && Array.isArray(s.antigens)) {
+      s.antigens.forEach(ag => {
+        const key = ag.name;
+        if (!antigenMap[key]) antigenMap[key] = [];
+        antigenMap[key].push({ ...ag, house: s.house, date: s.date, sampleAge: s.sampleAge, status: s.status });
+      });
+    }
+  });
+
+  const diagCardsHTML = Object.entries(antigenMap).map(([agName, items]) => {
+    const latest = items[items.length - 1];
+    const isDone = latest.status === 'done';
+    return `
+      <div class="diag-card">
+        <div class="dc-header">
+          <span class="dc-title">${agName} (${latest.method || 'HI'})</span>
+          <span class="pill ${stPill(latest.status)}">${t('st_'+latest.status)}</span>
+        </div>
+        <div class="dc-body">
+          <div><small class="muted">Rata-rata Titer</small><div class="dc-val">${isDone ? nd(latest.titer, 1) : '—'}</div></div>
+          <div><small class="muted">CV (%)</small><div class="dc-val" style="color:var(--a6)">${isDone && latest.cv !== undefined ? nd(latest.cv, 1) + '%' : 'N/A'}</div></div>
+        </div>
+        <div class="dc-meta">
+          <span>Kandang ${latest.house} · ${formatAgeDisplay(latest.sampleAge)}</span>
+          <span>n = ${latest.n || 16} · ${fS(latest.date)}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const rows = paginatedList.map(s => `<tr>
+    <td>${fD(s.date)}<div class="muted small">${formatAgeDisplay(s.sampleAge)}</div></td>
+    <td>Kandang ${s.house}</td>
+    <td>${t('t_'+s.type)}</td>
+    <td class="n">${s.qty}</td>
+    <td>${esc(s.purpose||'Unspecified')}</td>
+    <td>
+      <select class="sel table-status-sel" data-id="${s.id}" style="padding:4px 8px;font-size:12px;width:auto">
+        ${STATUSES.map(st=>`<option value="${st}"${s.status===st?' selected':''}>${t('st_'+st)}</option>`).join('')}
+      </select>
+    </td>
+    <td>${s.value!==null&&s.value!==undefined?`<b>${nd(s.value,s.value%1?1:0)} ${esc(s.unit||'')}</b>`:''}${s.findings?`<div class="muted small">${esc(s.findings)}</div>`:s.value==null?'<span class="muted">—</span>':''}</td>
+    <td style="white-space:nowrap"><button class="btn sm" data-act="result" data-id="${s.id}">${t('inRes')}</button>${rowActs('samples',s.id)}</td>
+  </tr>`).join('');
+
+  return head(t('sTitle'),t('sSub'),`<button class="btn g" data-act="add" data-col="samples"><i class="fa-solid fa-plus"></i>${t('addS')}</button>`)+
+   `<div class="card" style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+        <h2><i class="fa-solid fa-stethoscope"></i> Diagnostic & Antibody Monitoring (Terkini)</h2>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;font-weight:700">Filter Kandang Diagnostik:</span>
+          <select class="sel" id="diagHouseFilter" style="width:auto">
+            <option value="all"${ui.diagHouse==='all'?' selected':''}>Semua Kandang</option>
+            ${state.houses.map(h=>`<option value="${h.id}"${String(ui.diagHouse)===String(h.id)?' selected':''}>Kandang ${h.id}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      ${diagCardsHTML ? `<div class="diag-grid">${diagCardsHTML}</div>` : `<p class="muted">Belum ada data hasil serologi/antigen untuk kandang yang dipilih. Klik 'Input Hasil' pada sampel serum di bawah.</p>`}
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+        <h2><i class="fa-solid fa-chart-line"></i> OPG Monitoring (Oocyte Per Gram)</h2>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;font-weight:700">Filter OPG:</span>
+          ${renderHouseCBs('opgHouseFilter')}
+        </div>
+      </div>
+      <div class="chart" style="height:300px"><canvas id="cOPG" role="img" aria-label="OPG Monitoring"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+        <h2><i class="fa-solid fa-vial-circle-check"></i> Riwayat Monitoring Sampel</h2>
+        <div class="row" style="gap:12px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:12px;font-weight:700">Filter Kandang:</span>
+            ${renderHouseCBs('sampHouseFilter')}
+          </div>
+          <label class="row" style="gap:6px;font-size:12.5px;font-weight:700">Rows per page:
+            <select class="sel" id="sampRowsSel" style="width:auto">
+              ${[10, 20, 50, 100].map(n => `<option value="${n}" ${ui.sampRowsPerPage === n ? 'selected' : ''}>${n}</option>`).join('')}
+            </select>
+          </label>
+        </div>
+      </div>
+      ${list.length ? `
+        <div class="tw"><table><thead><tr><th>${t('date')} / Umur</th><th>${t('house')}</th><th>${t('type')}</th><th class="n">${t('qty')}</th><th>${t('purpose')}</th><th>${t('status')}</th><th>${t('result')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows}</tbody></table></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;font-size:13px">
+          <span class="muted">Showing ${totalRows > 0 ? startIndex + 1 : 0}–${endIndex} of ${totalRows} entries</span>
+          <div class="row" style="gap:6px">
+            <button class="btn sm" id="sampPrevBtn" ${ui.sampCurrentPage <= 1 ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>Previous</button>
+            <span style="font-weight:700;padding:0 6px">Page ${ui.sampCurrentPage} of ${totalPages}</span>
+            <button class="btn sm" id="sampNextBtn" ${ui.sampCurrentPage >= totalPages ? 'disabled style="opacity:0.5;cursor:not-allowed"' : ''}>Next</button>
+          </div>
+        </div>
+      ` : empty()}
+    </div>`;
+}
+
+function vSchedule(){
+  const m=curMatrix(),list=state.weeklyMatrixList;
+  const hs=HS(),isActive=activeMatrix()&&activeMatrix().id===m?.id,ti=todayIdx();
+  const med = medsForMatrixToday(m, hs);
+  
+  const calcHTML = `
+  <div class="card" style="margin-bottom:16px; padding:0; overflow:hidden">
+    <div class="calc-header" onclick="document.getElementById('calcBody').classList.toggle('show'); this.querySelector('.fa-chevron-down').classList.toggle('fa-rotate-180')">
+       <div style="display:flex;align-items:center;gap:12px">
+         <i class="fa-solid fa-calculator" style="font-size:20px; color:var(--s6)"></i>
+         <b style="font-size:15px">Quick Drug Dosage Calculator</b>
+       </div>
+       <i class="fa-solid fa-chevron-down" style="transition:all 0.2s"></i>
+    </div>
+    
+    <div id="calcBody" class="calc-body" style="padding:0 20px 20px 20px">
+      <p class="muted small" style="margin-bottom:16px;">Hitung kebutuhan obat berdasarkan dosis target (mg/kg), berat badan aktual, dan konsentrasi produk.</p>
+      <div class="grid two" style="gap:24px">
+        <div>
+          <div style="margin-bottom:18px">
+            <h3 style="font-size:14px; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:6px; color:var(--text);">1. Parameter Populasi & Bobot Badan</h3>
+            <div class="fg" style="grid-template-columns:1fr 1fr;">
+              <label class="fl">Female Pop. (birds)<input type="number" id="dc_f_pop" class="inp calc-trigger" min="0" placeholder="e.g. 18000"></label>
+              <label class="fl">Avg Female BW (g)<input type="number" id="dc_f_bw" class="inp calc-trigger" min="0" placeholder="e.g. 1650"></label>
+              <label class="fl">Male Pop. (birds)<input type="number" id="dc_m_pop" class="inp calc-trigger" min="0" placeholder="e.g. 1800"></label>
+              <label class="fl">Avg Male BW (g)<input type="number" id="dc_m_bw" class="inp calc-trigger" min="0" placeholder="e.g. 2100"></label>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:14px; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:6px; color:var(--text);">2. Parameter Obat & Dosis</h3>
+            <div class="fg" style="grid-template-columns:1fr 1fr;">
+              <label class="fl full">Drug / Product Name
+                <input list="dc_drug_list" id="dc_drug" class="inp calc-trigger" placeholder="Pilih atau Ketik Nama Produk...">
+                <datalist id="dc_drug_list">${state.masterDrugCatalog.map(d=>`<option value="${esc(d)}">`).join('')}</datalist>
+              </label>
+              <label class="fl full">Target Dose (mg act. ing. / kg BW)<input type="number" id="dc_dose" class="inp calc-trigger" min="0" step="any" placeholder="e.g. 15"></label>
+              <label class="fl">Formulation Type
+                <select id="dc_form" class="sel calc-trigger">
+                  <option value="liquid">Liquid (Cair)</option>
+                  <option value="solid">Solid (Padat/Serbuk)</option>
+                </select>
+              </label>
+              <div class="fl">
+                 <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:4px;">Product Concentration</label>
+                 <div style="display:flex; gap:6px;">
+                   <input type="number" id="dc_conc" class="inp calc-trigger" min="0" step="any" style="flex:1;" placeholder="Value">
+                   <select id="dc_conc_unit" class="sel calc-trigger" style="width:100px;"></select>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background:var(--soft); border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:12px; border:1px solid var(--border);">
+           <h3 style="font-size:15px; margin-bottom:4px;"><i class="fa-solid fa-square-poll-horizontal" style="color:var(--s6)"></i> Hasil Kalkulasi</h3>
+           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:13px;">
+              <div style="background:var(--bg); padding:12px; border-radius:10px; border:1px solid var(--border);">
+                <div class="muted" style="font-size:11.5px">Total Pop. Betina (♀)</div>
+                <b id="dc_res_fpop" style="font-size:16px;">0</b> <span class="muted" style="font-size:11px">ekor</span>
+                <div class="muted" style="font-size:11.5px; margin-top:4px; border-top:1px dashed var(--border); padding-top:4px;">Total BW: <b id="dc_res_fbw" style="color:var(--text)">0.00</b> kg</div>
+              </div>
+              <div style="background:var(--bg); padding:12px; border-radius:10px; border:1px solid var(--border);">
+                <div class="muted" style="font-size:11.5px">Total Pop. Jantan (♂)</div>
+                <b id="dc_res_mpop" style="font-size:16px;">0</b> <span class="muted" style="font-size:11px">ekor</span>
+                <div class="muted" style="font-size:11.5px; margin-top:4px; border-top:1px dashed var(--border); padding-top:4px;">Total BW: <b id="dc_res_mbw" style="color:var(--text)">0.00</b> kg</div>
+              </div>
+           </div>
+           <div style="background:var(--bg); padding:14px; border-radius:10px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+              <div><div class="muted" style="font-size:12px">Total Flock Population</div><b id="dc_res_totpop" style="font-size:18px;">0</b> <span class="muted" style="font-size:12px">ekor</span></div>
+              <div style="text-align:right;"><div class="muted" style="font-size:12px">Total Flock Body Weight</div><b id="dc_res_totbw" style="font-size:18px; color:var(--s6);">0.00</b> <span class="muted" style="font-size:12px">kg</span></div>
+           </div>
+           
+           <div style="border-top:1px dashed var(--border); margin:4px 0;"></div>
+           <div style="background:var(--bg); padding:14px; border-radius:10px; border:1px solid var(--border);">
+             <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span class="muted" style="font-size:12.5px">Drug Name</span><b id="dc_res_drug">—</b></div>
+             <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span class="muted" style="font-size:12.5px">Formulation Type</span><b id="dc_res_form">Liquid (Cair)</b></div>
+             <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span class="muted" style="font-size:12.5px">Applied Dose</span><b id="dc_res_dose">0 mg/kg</b></div>
+             <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span class="muted" style="font-size:12.5px">Required Active Ingredient</span><b id="dc_res_active" style="color:var(--a6)">0.00 mg</b></div>
+             <div style="background:var(--g-soft); padding:16px; border-radius:10px; border:1.5px solid var(--g5); margin-top:14px; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <span style="font-size:12.5px; font-weight:800; color:var(--g7); margin-bottom:4px; letter-spacing:0.5px">TOTAL PRODUCT REQUIRED</span>
+                <div style="font-size:28px; font-weight:800; color:var(--g7); line-height:1;" id="dc_res_final">0.00 <span style="font-size:16px; font-weight:700" id="dc_res_final_unit">mL</span></div>
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+
+  if(!m) return head(t('schedule'),'',`<button class="btn g" data-act="newmx"><i class="fa-solid fa-plus"></i>${t('newMx')}</button>`)+calcHTML+`<div class="card">${empty()}</div>`;
+  
+  const heads=[0,1,2,3,4,5,6].map(d=>`<th class="${isActive&&d===ti?'today':''}">${dayName(d)}<span class="dt">${fS(addDays(m.monday,d))}</span></th>`).join('');
+  const body=hs.map(h=>`<tr><td class="h">${t('house')} ${h.id}</td>${[0,1,2,3,4,5,6].map(d=>`<td class="${isActive&&d===ti?'today':''}">${(m.cells[h.id-1]?.[d]||[]).filter(s=>s.drug).map(s=>`<span class="dr"><b>${esc(s.drug)}</b>${s.dose?`<em>${esc(s.dose)}</em>`:''}</span>`).join('')||'<span class="muted">—</span>'}</td>`).join('')}</tr>`).join('');
+  
+  return head(t('schedule'),esc(m.title)+' · '+fS(m.monday)+' – '+fD(addDays(m.monday,6)),
+   `<select class="sel" style="width:auto" id="mxsel" aria-label="${t('matrixSel')}">${list.map(x=>`<option value="${x.id}"${x.id===m.id?' selected':''}>${esc(x.title)} (${fS(x.monday)})</option>`).join('')}</select>
+    <button class="btn g" data-act="newmx"><i class="fa-solid fa-plus"></i>${t('newMx')}</button>`)+
+   calcHTML +
+   `<div class="card" style="margin-bottom:16px"><h2><i class="fa-solid fa-capsules"></i>${t('medToday')}</h2>${med.length?`<div class="chips">${med.map(x=>`<span class="pill p-s">${t('house')} ${x.h}: ${x.sl.map(s=>esc(s.drug)+(s.dose?' '+esc(s.dose):'')).join(' + ')}</span>`).join('')}</div>`:`<p class="muted">${t('none')}</p>`}</div>
+   <div class="card">
+     <div class="row" style="margin-bottom:12px">
+       <button class="btn s" data-act="editmx"><i class="fa-solid fa-pen"></i>${t('editThis')}</button>
+       <button class="btn" data-act="print"><i class="fa-solid fa-print"></i>${t('print')}</button>
+     </div>
+     <div class="tw"><table class="mx"><thead><tr><th class="h">${t('house')}</th>${heads}</tr></thead><tbody>${body}</tbody></table></div>
+   </div>`;
+}
+
+function vNecropsy(){
+  const q=ui.search.toLowerCase();
+  const list=state.necropsyRecords.filter(r=>inScope(r)&&(!q||(r.lesions+' '+r.diagnosis).toLowerCase().includes(q))).sort((a,b)=>b.date.localeCompare(a.date));
+  const rows=list.map(r=>`<tr>
+    <td>${fD(r.date)}<div class="muted small">${r.age} ${t('wk')}</div></td>
+    <td>${r.house}</td>
+    <td>${r.sex==='male'?'♂ Jantan':'♀ Betina'}</td>
+    <td><span class="pill p-r">${t('sy_'+r.system)}</span></td>
+    <td><b>${esc(r.diagnosis||'—')}</b></td>
+    <td style="min-width:220px">${esc(r.lesions)}${r.reco?`<div class="muted small">${esc(r.reco)}</div>`:''}</td>
+    <td class="n">${r.images ? r.images.length : 0} foto</td>
+    <td style="white-space:nowrap">
+      <button class="ic" data-act="viewnec" data-id="${r.id}" aria-label="Lihat Kasus"><i class="fa-solid fa-eye"></i></button>
+      ${rowActs('necropsyRecords',r.id)}
+    </td>
+  </tr>`).join('');
+  return head(t('necropsy'),t('nSub'),`<input class="inp" style="width:240px" id="search" type="search" placeholder="${t('searchN')}" value="${esc(ui.search)}" aria-label="${t('searchN')}"><button class="btn g" data-act="add" data-col="necropsyRecords"><i class="fa-solid fa-plus"></i>${t('addN')}</button>`)+
+   `<div class="card">${list.length?`<div class="tw"><table><thead><tr><th>${t('dateAge')}</th><th>${t('house')}</th><th>Jenis Kelamin</th><th>${t('system')}</th><th>${t('dx')}</th><th>${t('lesions')}</th><th>Lampiran</th><th>${t('actions')}</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty()}</div>`;
+}
+
+function vBW(){
+  const list=state.bodyWeightData.filter(inScope).sort((a,b)=>b.date.localeCompare(a.date)||a.house-b.house);
+  const rows=list.map(b=>{
+    const refTarget = getReferenceTarget(b.age, 'femaleBw');
+    const dv=refTarget?(b.mean-refTarget)/refTarget*100:null;
+    return `<tr>
+      <td>${fD(b.date)}</td>
+      <td>${b.house}</td>
+      <td class="n">${b.age}</td>
+      <td class="n">${b.n}</td>
+      <td class="n"><b>${n0(b.mean)} g</b></td>
+      <td class="n">${refTarget ? n0(refTarget)+' g' : '—'}</td>
+      <td class="n">${dv===null?'—':`<span class="pill ${Math.abs(dv)>5?'p-r':Math.abs(dv)>2?'p-a':'p-g'}">${dv>0?'+':''}${nd(dv)}%</span>`}</td>
+      <td class="n"><span class="pill ${b.unif<80?'p-r':b.unif<85?'p-a':'p-g'}">${nd(b.unif)}%</span></td>
+      <td class="n">${nd(b.cv)}%</td>
+      <td style="white-space:nowrap">${rowActs('bodyWeightData',b.id)}</td>
+    </tr>`;
+  }).join('');
+
+  return head(t('bw'),t('bSub'),`<button class="btn g" data-act="add" data-col="bodyWeightData"><i class="fa-solid fa-plus"></i>${t('addB')}</button>`)+
+   `<div class="card calc" style="margin-bottom:16px"><h2><i class="fa-solid fa-calculator"></i>${t('calcT')}</h2><textarea class="inp" id="wts" placeholder="${t('paste')}" aria-label="${t('paste')}"></textarea>
+    <div class="row" style="margin-top:10px"><button class="btn a" style="background:var(--a6);border-color:var(--a6);color:#fff" data-act="calc"><i class="fa-solid fa-play"></i>${t('calc')}</button><button class="btn" id="savecalc" data-act="calc2log" disabled>${t('toLog')}</button><span class="err" id="cerr"></span></div>
+    <div class="res" id="cres" hidden><div><small>${t('cnt')}</small><b id="r1">–</b></div><div><small>${t('mean')}</small><b id="r2">–</b></div><div><small>${t('unifBand')}</small><b id="r3">–</b></div><div><small>${t('cv')} %</small><b id="r4">–</b></div></div></div>
+   <div class="card"><h2><i class="fa-solid fa-table-list"></i>${t('logT')}</h2>${list.length?`<div class="tw"><table><thead><tr><th>${t('date')}</th><th>${t('house')}</th><th class="n">${t('age')} (Mgg)</th><th class="n">${t('nS')}</th><th class="n">${t('mean')} (♀)</th><th class="n">${t('tgt')} (♀)</th><th class="n">${t('dev')}</th><th class="n">${t('unif')}</th><th class="n">${t('cv')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty()}</div>`;
+}
+
+function vMort(){
+  const list=state.mortalityLogs.filter(inScope).sort((a,b)=>b.date.localeCompare(a.date)||a.house-b.house).slice(0,300);
+  const rows=list.map(m=>`<tr><td>${fD(m.date)}</td><td>${m.house}</td><td class="n">${m.natural}</td><td class="n">${m.culls}</td><td class="n"><b>${m.natural+m.culls}</b></td><td><span class="pill p-r">${t('c_'+m.cause)}</span></td><td style="white-space:nowrap">${rowActs('mortalityLogs',m.id)}</td></tr>`).join('');
+  return head(t('mortality'),t('mSub'),`<button class="btn g" data-act="add" data-col="mortalityLogs"><i class="fa-solid fa-plus"></i>${t('addM')}</button>`)+
+   `<div class="card">${list.length?`<div class="tw"><table><thead><tr><th>${t('date')}</th><th>${t('house')}</th><th class="n">${t('nat')}</th><th class="n">${t('cull')}</th><th class="n">${t('tot')}</th><th>${t('cause')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty()}</div>`;
+}
+
+function autoSummary(hs){
+  const hd=lastHD(hs),bw=femaleBwLatest(hs),cut=addDays(today(),-30),ids=hs.map(h=>h.id);
+  const nec=state.necropsyRecords.filter(r=>ids.includes(r.house)&&r.date>=cut);
+  const cnt={};nec.forEach(r=>{if(r.diagnosis)cnt[r.diagnosis]=(cnt[r.diagnosis]||0)+1});
+  const dx=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0]?.[0]||'';
+  return L.sumTpl[ui.lang==='id'?0:1]({date:fD(today()),scope:t('allH'),pop:n0(popOf(hs)),hd:hd===null?'—':nd(hd)+'%',mort:nd(mort7(hs),3)+'%',bw:bw?n0(bw.mean)+' g':'—',un:bw?nd(bw.unif)+'%':'—',necN:nec.length,dx,pend:state.samples.filter(s=>s.status!=='done'&&ids.includes(s.house)).length});
+}
+
+function vReport(){
+  const hs=HS(),p=state.profile,cut=addDays(today(),-30);
+  const rows=hs.map(h=>{const b=femaleBwLatest([h]);return`<tr><td>${h.id}</td><td style="text-align:right">${n0(getHouseLivePopulation(h.id).total)}</td><td style="text-align:right">${lastHD([h])===null?'—':nd(lastHD([h]))+'%'}</td><td style="text-align:right">${nd(mort7([h]),3)}%</td><td style="text-align:right">${b?n0(b.mean)+' g':'—'}</td><td style="text-align:right">${b?nd(b.unif)+'%':'—'}</td><td style="text-align:right">${state.necropsyRecords.filter(r=>r.house===h.id&&r.date>=cut).length}</td><td style="text-align:right">${state.samples.filter(s=>s.house===h.id&&s.status!=='done').length}</td></tr>`}).join('');
+  const sm=state.report.summary||autoSummary(hs);
+  return head(t('report'),t('editHint'),`<button class="btn" data-act="regen"><i class="fa-solid fa-rotate"></i>${t('regen')}</button><button class="btn g" data-act="print"><i class="fa-solid fa-print"></i>${t('printR')}</button>`)+
+   `<div class="cert"><h1>${esc(p.farm||'AvianCare PRO')}</h1><div class="sub">${t('rTitle')} · ${t('rSub')}</div>
+    <div class="meta"><div><b>${t('auditDate')}:</b> ${fD(today())}</div><div><b>${t('scopeR')}:</b> ${t('allH')}</div><div><b>${t('vet')}:</b> ${esc(p.name)||'—'}</div><div><b>${t('reg')}:</b> ${esc(p.reg)||'—'}</div><div><b>${t('pop')}:</b> ${n0(popOf(hs))} ${t('birds')}</div><div><b>${t('henday')}:</b> ${lastHD(hs)===null?'—':nd(lastHD(hs))+'%'}</div></div>
+    <div class="tw"><table><thead><tr><th>${t('rHouse')}</th><th>${t('pop')}</th><th>${t('henday')}</th><th>${t('rMort')}</th><th>${t('mean')}</th><th>${t('unif')}</th><th>${t('rNec')}</th><th>${t('rPend')}</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <h4>${t('clin')}</h4><div class="sum" id="sumtxt" contenteditable="true" role="textbox" aria-label="${t('clin')}">${esc(sm)}</div>
+    <div class="sign"><div>${t('signM')}</div><div>${t('signV')}<br><b>${esc(p.name)}</b></div></div></div>`;
+}
+
+const VIEWS={dash:vDash,prodinput:vProdInput,refmod:vProductionReferenceModule,samples:vSamples,schedule:vSchedule,necropsy:vNecropsy,bw:vBW,mortality:vMort,report:vReport};
+const NAV=[
+  ['dash','fa-gauge-high'],
+  ['prodinput','fa-clipboard-list'],
+  ['samples','fa-vial'],
+  ['schedule','fa-calendar-week'],
+  ['necropsy','fa-notes-medical'],
+  ['bw','fa-weight-scale'],
+  ['mortality','fa-skull-crossbones'],
+  ['report','fa-file-medical']
+];
+
+/* ================= charts ================= */
+let charts=[];
+const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// Custom Plugin untuk Garis Tegak Lurus (Crosshair)
+const crosshairPlugin = {
+  id: 'crosshair',
+  afterDraw: chart => {
+    if (chart.tooltip && chart.tooltip._active && chart.tooltip._active.length) {
+      const activePoint = chart.tooltip._active[0];
+      const ctx = chart.ctx;
+      const x = activePoint.element.x;
+      const topY = chart.scales.y.top;
+      const bottomY = chart.scales.y.bottom;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x, topY);
+      ctx.lineTo(x, bottomY);
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = '#16a34a'; // Garis hijau
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+};
+
+function drawCharts(){
+  charts.forEach(c=>c.destroy());charts=[];if(typeof Chart==='undefined')return;
+  const grid=cv('--border'),mu=cv('--muted');Chart.defaults.color=mu;Chart.defaults.font.family="'Plus Jakarta Sans',system-ui,sans-serif";
+  const hs=HS();
+
+  if($('#cA')){
+    const days = ui.chartDays || 7;
+    const labels=[],egg=[],mo=[];const p=popOf(hs);
+    for(let i=days-1;i>=0;i--){
+      const d=addDays(today(),-i);
+      labels.push(d); // Simpan tanggal ISO
+      egg.push(hdOn(d,hs));
+      mo.push(p?+(deadOn(d,hs)/p*100).toFixed(3):0);
+    }
+    
+    charts.push(new Chart($('#cA'),{
+      type:'line',
+      data: {
+        labels,
+        datasets:[
+          {label:'Hen-Day %', data:egg, borderColor:cv('--g5'), backgroundColor:cv('--g5'), tension:0.3, yAxisID:'y', borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 6, spanGaps:true},
+          {label:'Mortalitas %', data:mo, borderColor:cv('--r5'), backgroundColor:cv('--r5'), tension:0.3, yAxisID:'y1', borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 6, borderDash:[5,4]}
+        ]
+      },
+      plugins: [crosshairPlugin],
+      options:{
+        maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{position:'bottom',labels:{boxWidth:12}},
+          tooltip: {
+            callbacks: {
+              title: function(context) {
+                const isoDate = context[0].label;
+                let titleTxt = fD(isoDate);
+                if (ui.house !== 'all') {
+                  const age = getHouseCurrentAge(+ui.house, isoDate);
+                  titleTxt += ` (${age})`;
+                }
+                return titleTxt;
+              }
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{display:false},
+            ticks: {
+              callback: function(val, index) {
+                return days === 7 ? fS(labels[index]) : ''; // Sembunyikan label tanggal jika 1/3 Bulan
+              }
+            }
+          },
+          y:{position:'left',grid:{color:grid},title:{display:true,text:'Hen-Day %'}},
+          y1:{position:'right',grid:{display:false},beginAtZero:true,title:{display:true,text:'Mortalitas %'}}
+        }
+      }
+    }));
+  }
+
+  if($('#cB')){
+    const causeItems = getAccumulatedMortalityAndNecropsy(hs);
+    charts.push(new Chart($('#cB'),{
+      type: 'bar',
+      data: {
+        labels: causeItems.map(c => c.name),
+        datasets: [{
+          data: causeItems.map(c => c.count),
+          backgroundColor: causeItems.map(c => c.color || '#0284c7'),
+          borderRadius: 6,
+          maxBarThickness: 36
+        }]
+      },
+      options: { 
+        indexAxis: 'x', 
+        maintainAspectRatio: false, 
+        plugins: { 
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const item = causeItems[context.dataIndex];
+                return ` Jumlah: ${item.count} ekor (${item.pct}%)`;
+              }
+            }
+          }
+        }, 
+        scales: { 
+          x: { 
+            grid: { display: false },
+            ticks: { font: { size: 11 }, maxRotation: 25, minRotation: 15 } 
+          }, 
+          y: { 
+            grid: { color: grid }, 
+            beginAtZero: true,
+            title: { display: true, text: 'Jumlah Kematian / Necropsy' }
+          } 
+        } 
+      }
+    }));
+  }
+
+  if($('#cOPG')){
+    const selHouses = ui.opgHouseFilter;
+    const colors = ['#16a34a', '#0284c7', '#7c3aed', '#d97706', '#4f46e5', '#db2777', '#0d9488', '#ea580c', '#2563eb'];
+    
+    // Kumpulkan semua umur unit agar sumbu X selaras
+    const allFec = state.samples.filter(s => s.type === 'feces' && selHouses.includes(s.house) && s.value !== null);
+    const ageSet = new Set();
+    allFec.forEach(s => {
+      const p = parseAgeToDays(s.sampleAge || '25+0');
+      ageSet.add(+(p.w + p.d/7).toFixed(2));
+    });
+    const sortedAges = Array.from(ageSet).sort((a,b)=>a-b);
+    const labels = sortedAges.map(a => {
+      const w = Math.floor(a);
+      const d = Math.round((a - w) * 7);
+      return `${w}+${d} Mgg`;
+    });
+
+    const datasets = selHouses.map(hid => {
+      const hSamples = allFec.filter(s => s.house === hid);
+      const dataMap = {};
+      hSamples.forEach(s => {
+        const p = parseAgeToDays(s.sampleAge || '25+0');
+        dataMap[+(p.w + p.d/7).toFixed(2)] = s.value;
+      });
+      const data = sortedAges.map(a => dataMap[a] ?? null);
+      
+      return {
+        label: `Kandang ${hid}`,
+        data: data,
+        borderColor: colors[hid-1] || '#0f172a',
+        backgroundColor: colors[hid-1] || '#0f172a',
+        borderWidth: 1.5,
+        tension: 0.3,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        spanGaps: true
+      };
+    }).filter(d => d.data.some(v => v !== null));
+
+    charts.push(new Chart($('#cOPG'), {
+      type: 'line',
+      data: { labels, datasets },
+      plugins: [crosshairPlugin],
+      options: {
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { position: 'bottom' } },
+        scales: {
+          x: { grid: { display: false }, title: { display: true, text: 'Umur Sampling' } },
+          y: { beginAtZero: true, grid: { color: grid }, title: { display: true, text: 'OPG' } }
+        }
+      }
+    }));
+  }
+}
+
+/* ================= matrix editor ================= */
+let draft=null;
+function newDraft(){const cells={};for(let h=0;h<9;h++){cells[h]=[];for(let d=0;d<7;d++)cells[h].push([{drug:'',dose:''},{drug:'',dose:''},{drug:'',dose:''}])}return{id:uid(),title:'',monday:mondayOf(today()),cells,isNew:true}}
+function openEditor(m){draft=m?JSON.parse(JSON.stringify(m)):newDraft();renderEditor()}
+
+function renderEditor(keep){
+  const cat=state.masterDrugCatalog;
+  // Diubah: input obat kini HANYA menggunakan dropdown (select) dari catalog.
+  const body=[0,1,2,3,4,5,6,7,8].map(h=>`<tr><td class="h">${t('house')} ${h+1}</td>${[0,1,2,3,4,5,6].map(d=>`<td>${[0,1,2].map(s=>{const x=draft.cells[h][d][s];
+    return`<div class="slot" data-h="${h}" data-d="${d}" data-s="${s}"><select class="sel" aria-label="${t('catalog')}"><option value="">${t('pick')}</option>${cat.map(c=>`<option value="${esc(c)}"${x.drug===c?' selected':''}>${esc(c)}</option>`).join('')}</select><input class="inp" placeholder="${t('dose')}" value="${esc(x.dose)}" aria-label="${t('dose')}"></div>`}).join('')}</td>`).join('')}</tr>`).join('');
+  $('#editor').innerHTML=`<div class="ed"><div class="bar"><label class="fl" style="min-width:240px">${t('mxTitle')}<input class="inp" id="mtitle" value="${esc(draft.title)}"></label><label class="fl">${t('mxStart')}<input class="inp" type="date" id="mstart" value="${draft.monday}"></label>
+   <button class="btn" data-act="catalog"><i class="fa-solid fa-book-medical"></i>${t('catalog')}</button>
+   ${!draft.isNew ? `<button type="button" class="btn r" data-act="delmx-confirm" style="margin-left:8px"><i class="fa-solid fa-trash"></i> Hapus Jadwal</button>` : ''}
+   <span style="margin-left:auto" class="row"><span class="err" id="eerr"></span><button class="btn" data-act="closeed">${t('cancel')}</button><button class="btn g" data-act="saveed"><i class="fa-solid fa-lock"></i>${t('saveLock')}</button></span></div>
+   <p class="muted small" style="margin-bottom:10px">${t('mxHint')}</p><div class="tw"><table class="mx"><thead><tr><th class="h">${t('house')}</th>${[0,1,2,3,4,5,6].map(d=>`<th>${dayName(d)}<span class="dt">${fS(addDays(draft.monday,d))}</span></th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div></div>`;
+  if(keep){const e=$('#editor .ed');e.scrollTop=keep[0];e.scrollLeft=keep[1]}
+}
+
+function syncDraft(){
+  draft.title=$('#mtitle').value.trim();draft.monday=$('#mstart').value||draft.monday;
+  document.querySelectorAll('#editor .slot').forEach(sl=>{const[h,d,s]=['h','d','s'].map(k=>+sl.dataset[k]);const[a,b]=sl.children;
+    draft.cells[h][d][s]={drug:a.value,dose:b.value.trim()};});
+}
+
+function openCatalog(){
+  syncDraft();
+  const draw=()=>{openModal(`<h3>${t('catalog')}</h3><form id="cf" class="row" style="margin-bottom:12px;flex-wrap:nowrap"><input class="inp" id="newdrug" placeholder="${t('drugName')}"><button class="btn g" type="submit">${t('addDrug')}</button></form>
+   <div>${state.masterDrugCatalog.map((c,i)=>`<div class="li"><span>${esc(c)}</span><button class="ic del" data-act="deldrug" data-i="${i}" aria-label="${t('del')}"><i class="fa-solid fa-xmark"></i></button></div>`).join('')||`<p class="muted">${t('none')}</p>`}</div>
+   <div class="acts"><button class="btn" data-act="closem">${t('close')}</button></div>`);
+   $('#cf').onsubmit=async e=>{e.preventDefault();const v=$('#newdrug').value.trim();if(v&&!state.masterDrugCatalog.includes(v)){state.masterDrugCatalog.push(v);await save();refresh();draw()}};};
+  const refresh=()=>{const e=$('#editor .ed');renderEditor([e.scrollTop,e.scrollLeft])};
+  openCatalog.draw=()=>{refresh();draw()};draw();
+}
+
+/* ================= Quick Drug Dosage Calculator Events ================= */
+function attachDosageCalcEvents() {
+  const fPop = $('#dc_f_pop'), fBw = $('#dc_f_bw');
+  const mPop = $('#dc_m_pop'), mBw = $('#dc_m_bw');
+  const drug = $('#dc_drug'), dose = $('#dc_dose'), form = $('#dc_form'), conc = $('#dc_conc'), concUnit = $('#dc_conc_unit');
+
+  if (!fPop) return;
+
+  const updateUnits = () => {
+    const isLiq = form.value === 'liquid';
+    concUnit.innerHTML = isLiq
+      ? `<option value="mg/mL">mg/mL</option><option value="g/100mL">g/100 mL</option><option value="g/L">g/L</option>`
+      : `<option value="mg/g">mg/g</option><option value="g/100g">g/100 g</option><option value="g/kg">g/kg</option>`;
+    runCalc();
+  };
+
+  const runCalc = () => {
+    const fp = parseFloat(fPop.value) || 0;
+    const fbg = parseFloat(fBw.value) || 0;
+    const mp = parseFloat(mPop.value) || 0;
+    const mbg = parseFloat(mBw.value) || 0;
+    
+    // Konversi massa bobot badan (g ke kg) dan dihitung per jenis kelamin (bukan dirata-rata total)
+    const fWeightKg = (fp * fbg) / 1000;
+    const mWeightKg = (mp * mbg) / 1000;
+    const totalBirds = fp + mp;
+    const totalWeightKg = fWeightKg + mWeightKg;
+
+    $('#dc_res_fpop').textContent = n0(fp);
+    $('#dc_res_fbw').textContent = nd(fWeightKg, 2);
+    $('#dc_res_mpop').textContent = n0(mp);
+    $('#dc_res_mbw').textContent = nd(mWeightKg, 2);
+    $('#dc_res_totpop').textContent = n0(totalBirds);
+    $('#dc_res_totbw').textContent = nd(totalWeightKg, 2);
+
+    const dName = drug.value.trim() || '—';
+    const dDose = parseFloat(dose.value) || 0;
+    const cVal = parseFloat(conc.value) || 0;
+    const cUnit = concUnit.value;
+    const isLiq = form.value === 'liquid';
+    
+    $('#dc_res_form').textContent = isLiq ? 'Liquid (Cair)' : 'Solid (Padat/Serbuk)';
+    $('#dc_res_drug').textContent = dName;
+    $('#dc_res_dose').textContent = dDose > 0 ? `${dDose} mg/kg` : '0 mg/kg';
+
+    if (totalWeightKg > 0 && dDose > 0 && cVal > 0) {
+      // Perhitungan Active Ingredient Required
+      const reqActiveMg = dDose * totalWeightKg;
+      $('#dc_res_active').textContent = `${nd(reqActiveMg, 2)} mg`;
+
+      // Konversi secara otomatis konsentrasi produk ke base unit (mg/mL atau mg/g)
+      let baseConcMgPerUnit = 0; 
+      if (cUnit === 'mg/mL' || cUnit === 'mg/g') baseConcMgPerUnit = cVal;
+      else if (cUnit === 'g/100mL' || cUnit === 'g/100g') baseConcMgPerUnit = cVal * 10;
+      else if (cUnit === 'g/L' || cUnit === 'g/kg') baseConcMgPerUnit = cVal * 1; 
+
+      if (baseConcMgPerUnit > 0) {
+        // Perhitungan Total Produk yang Dibutuhkan
+        const reqProduct = reqActiveMg / baseConcMgPerUnit;
+        $('#dc_res_final').innerHTML = `${nd(reqProduct, 2)} <span style="font-size:16px; font-weight:700">${isLiq ? 'mL' : 'g'}</span>`;
+      } else {
+        $('#dc_res_final').innerHTML = `0.00 <span style="font-size:16px; font-weight:700">${isLiq ? 'mL' : 'g'}</span>`;
+      }
+    } else {
+      $('#dc_res_active').textContent = `0.00 mg`;
+      $('#dc_res_final').innerHTML = `0.00 <span style="font-size:16px; font-weight:700">${isLiq ? 'mL' : 'g'}</span>`;
+    }
+  };
+
+  form.addEventListener('change', updateUnits);
+  
+  const triggers = document.querySelectorAll('.calc-trigger');
+  triggers.forEach(el => el.addEventListener('input', runCalc));
+  
+  // Inisiasi awal dropdown unit (tanpa override nilai input sebelumnya)
+  if(concUnit.options.length === 0) updateUnits();
+}
+
+
+/* ================= render & events ================= */
+function render(){
+  document.documentElement.classList.toggle('dark',ui.dark);document.documentElement.lang=ui.lang;
+  
+  // Dynamic background gradient based on house selection
+  const gradVar = ui.house === 'all' ? 'var(--dash-grad-0)' : `var(--dash-grad-${ui.house})`;
+  document.body.style.backgroundImage = gradVar;
+
+  $('#subt').textContent=t('sub');
+  document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('on',b.dataset.lang===ui.lang));
+  $('#dark i').className='fa-solid '+(ui.dark?'fa-sun':'fa-moon');
+  $('#quick').innerHTML=`<i class="fa-solid fa-plus"></i><span class="qt">${t('quick')}</span>`;$('#quick').setAttribute('aria-label',t('quick'));
+  const nm=state.profile.name||'Vet',ini=nm.replace(/^drh?\.\s*/i,'').split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase()||'V';
+  $('#prof').innerHTML=`<i>${esc(ini)}</i><span>${esc(nm)}<small>${t('vet')}</small></span>`;
+  const badge=pendingSoon(true).length;
+  $('#nav').innerHTML=NAV.map(([k,ic])=>`<button data-act="nav" data-v="${k}" data-tip="${esc(t(k))}" aria-label="${esc(t(k))}" class="${ui.tab===k?'on':''}"${ui.tab===k?' aria-current="page"':''}><i class="fa-solid ${ic}"></i>${k==='samples'&&badge?`<span class="badge">${badge}</span>`:''}</button>`).join('');
+  $('#main').innerHTML=VIEWS[ui.tab]();
+  
+  const ms=$('#mxsel');if(ms)ms.onchange=e=>{ui.matrixId=e.target.value;render()};
+  const sr=$('#search');if(sr)sr.oninput=e=>{ui.search=e.target.value;const p=e.target.selectionStart;render();const n=$('#search');n.focus();n.setSelectionRange(p,p)};
+  const sm=$('#sumtxt');if(sm)sm.onblur=async()=>{state.report.summary=sm.textContent.trim();await save()};
+  
+  const diagF = $('#diagHouseFilter');
+  if (diagF) diagF.onchange = e => { ui.diagHouse = e.target.value; render(); };
+
+  const prodRowsSel = $('#prodRowsSel');
+  if (prodRowsSel) prodRowsSel.onchange = e => { ui.prodRowsPerPage = +e.target.value; ui.prodCurrentPage = 1; render(); };
+
+  const prevBtn = $('#prodPrevBtn');
+  if (prevBtn) prevBtn.onclick = () => { if (ui.prodCurrentPage > 1) { ui.prodCurrentPage--; render(); } };
+  const nextBtn = $('#prodNextBtn');
+  if (nextBtn) nextBtn.onclick = () => { ui.prodCurrentPage++; render(); };
+
+  const sampRowsSel = $('#sampRowsSel');
+  if (sampRowsSel) sampRowsSel.onchange = e => { ui.sampRowsPerPage = +e.target.value; ui.sampCurrentPage = 1; render(); };
+
+  const sPrevBtn = $('#sampPrevBtn');
+  if (sPrevBtn) sPrevBtn.onclick = () => { if (ui.sampCurrentPage > 1) { ui.sampCurrentPage--; render(); } };
+  const sNextBtn = $('#sampNextBtn');
+  if (sNextBtn) sNextBtn.onclick = () => { ui.sampCurrentPage++; render(); };
+
+  document.querySelectorAll('.table-status-sel').forEach(sel => {
+    sel.onchange = async (e) => {
+      const id = e.target.dataset.id;
+      const newSt = e.target.value;
+      const sObj = state.samples.find(x => x.id === id);
+      if (sObj) {
+        sObj.status = newSt;
+        await save();
+        render();
+        toast('Status berhasil diperbarui');
+      }
+    };
+  });
+
+  const closeAlertBtn = $('#closealertbtn');
+  if (closeAlertBtn) closeAlertBtn.onclick = () => { ui.dismissAlert = true; render(); };
+
+  drawCharts();
+
+  if(ui.tab === 'schedule') {
+    attachDosageCalcEvents();
+  }
+}
+
+function runCalc(){
+  const list=($('#wts').value.split(/[\s,;]+/)).map(Number).filter(x=>x>0&&isFinite(x));
+  if(!list.length){$('#cerr').textContent=t('badW');return null}
+  $('#cerr').textContent='';const s=bwStats(list);
+  $('#cres').hidden=false;$('#r1').textContent=n0(s.n);$('#r2').textContent=nd(s.mean);$('#r3').textContent=nd(s.unif)+'%';$('#r4').textContent=nd(s.cv)+'%';$('#savecalc').disabled=false;
+  runCalc.last=s;return s;
+}
+
+document.addEventListener('click',async e=>{
+  if(!e.target.closest('.dd'))closeDD();
+  const lg=e.target.closest('[data-lang]');if(lg){ui.lang=lg.dataset.lang;await save();render();if($('#editor').innerHTML){syncDraft();renderEditor()}return}
+  const el=e.target.closest('[data-act]');if(!el)return;
+  const{act,col,id,v,k,i}=el.dataset;
+
+  if(act==='ddtoggle'){const m=el.nextElementSibling,open=m.hidden;closeDD();m.hidden=!open;el.setAttribute('aria-expanded',String(open))}
+  else if(act==='ddpick'){ui.house=v;render()}
+  else if(act==='nav'){ui.tab=v;ui.search='';render();window.scrollTo(0,0)}
+  else if(act==='setchartdays'){ui.chartDays=+v;render()}
+  else if(act==='openrefmod'){ui.tab='refmod';render();window.scrollTo(0,0)}
+  else if(act==='refmodcancel'){ui.tab='prodinput';render();window.scrollTo(0,0)}
+  else if(act==='refmodedit'){
+    document.querySelectorAll('.ref-view').forEach(el=>el.style.display='none');
+    document.querySelectorAll('.ref-edit').forEach(el=>el.style.display='inline-block');
+    $('#refEditBtn').style.display='none';
+    $('#refSaveBtn').style.display='inline-flex';
+    toast('Mode Edit Modul Acuan Aktif. Silakan ubah nilai sesuai kebutuhan.');
+  }
+  else if(act==='refmodsave'){
+    const inputs = document.querySelectorAll('.ref-edit');
+    if(!state.productionReference) state.productionReference = getDefaultReferenceTable();
+    inputs.forEach(inp => {
+      const w = +inp.dataset.w;
+      const key = inp.dataset.k;
+      const val = inp.value;
+      if (!state.productionReference[w]) state.productionReference[w] = {};
+      if (key === 'sexRatio') {
+        state.productionReference[w][key] = val;
+      } else {
+        state.productionReference[w][key] = parseFloat(val) || 0;
+      }
+    });
+    await save();
+    ui.tab = 'prodinput';
+    render();
+    toast('Production Reference Module berhasil diperbarui & disimpan.');
+  }
+  else if(act==='add')openForm(col);
+  else if(act==='adddailyprod')openDailyProductionModal();
+  else if(act==='editpop')openPopEditModal();
+  else if(act==='edit'){
+    if (col === 'dailyEntryLogs') openDailyProductionModal(state.dailyEntryLogs.find(r => r.id === id));
+    else openForm(col,state[col].find(r=>r.id===id));
+  }
+  else if(act==='del'){
+    const itemToDelete = state[col].find(r=>r.id===id);
+    if (itemToDelete) {
+      lastDeleted = { col, item: JSON.parse(JSON.stringify(itemToDelete)) };
+      state[col] = state[col].filter(r=>r.id!==id);
+      await save();
+      render();
+      toast('Data berhasil dihapus.', true);
+    }
+  }
+  else if(act==='result')openResult(state.samples.find(r=>r.id===id));
+  else if(act==='closem')closeModal();
+  else if(act==='quickgo'){closeModal();ui.tab={dailyEntryLogs:'prodinput',mortalityLogs:'mortality',necropsyRecords:'necropsy',bodyWeightData:'bw',samples:'samples'}[k];render();if(k==='dailyEntryLogs')openDailyProductionModal();else openForm(k)}
+  else if(act==='pop')openPopEditModal();
+  else if(act==='print'){try{window.print()}catch(_){toast('Print is not available here')}}
+  else if(act==='newmx')openEditor(null);
+  else if(act==='editmx')openEditor(curMatrix());
+  else if(act==='delmx-confirm'){
+    if(confirm("Yakin ingin menghapus jadwal ini secara permanen?")) {
+      state.weeklyMatrixList=state.weeklyMatrixList.filter(x=>x.id!==draft.id);
+      ui.matrixId=null;
+      $('#editor').innerHTML=''; draft=null;
+      await save(); render(); toast('Jadwal berhasil dihapus.', true);
+    }
+  }
+  else if(act==='catalog')openCatalog();
+  else if(act==='deldrug'){state.masterDrugCatalog.splice(+i,1);await save();openCatalog.draw()}
+  else if(act==='closeed'){$('#editor').innerHTML='';draft=null}
+  else if(act==='applyCb'){
+    const menu = el.closest('.dd-menu');
+    const allCb = menu.querySelector('input[value="all"]');
+    if (allCb && allCb.checked) {
+      ui[k] = [1,2,3,4,5,6,7,8,9];
+    } else {
+      const cbs = menu.querySelectorAll('.h-cb');
+      const selected = [];
+      cbs.forEach(cb => { if(cb.checked) selected.push(+cb.value); });
+      ui[k] = selected.length ? selected : [1]; // Fallback to house 1 if none checked
+    }
+    if (k === 'prodHouseFilter') ui.prodCurrentPage = 1;
+    if (k === 'sampHouseFilter') ui.sampCurrentPage = 1;
+    render();
+  }
+  else if(act==='saveed'){
+    syncDraft();if(!draft.title){$('#eerr').textContent=`${t('mxTitle')} ${t('req')}`;return}
+    draft.monday=mondayOf(draft.monday);delete draft.isNew;
+    const ix=state.weeklyMatrixList.findIndex(m=>m.id===draft.id);if(ix>=0)state.weeklyMatrixList[ix]=draft;else state.weeklyMatrixList.push(draft);
+    ui.matrixId=draft.id;draft=null;$('#editor').innerHTML='';await save();render();toast(t('saved'));
+  }
+  else if(act==='calc')runCalc();
+  else if(act==='calc2log'){const s=runCalc.last||runCalc();if(!s)return;openForm('bodyWeightData',null,{mean:Math.round(s.mean),unif:+s.unif.toFixed(1),cv:+s.cv.toFixed(1),n:s.n})}
+  else if(act==='regen'){state.report.summary='';await save();render()}
+  else if(act==='backup')download(`aviancare-backup-${today()}.json`,JSON.stringify(state,null,2),'application/json');
+  else if(act==='seed'){state=seed();state.settings={lang:ui.lang,dark:ui.dark};await save();closeModal();render();toast(t('saved'))}
+  else if(act==='wipe'){
+    const p=state.profile;state=seed();['samples','necropsyRecords','bodyWeightData','mortalityLogs','productionLogs','weeklyMatrixList','dailyEntryLogs'].forEach(x=>state[x]=[]);state.profile=p;await save();closeModal();render();toast(t('deleted'));
+  }
+  else if(act==='viewnec')openNecropsyView(id);
+});
+
+$('#dark').onclick=async()=>{ui.dark=!ui.dark;await save();render()};
+$('#quick').onclick=openQuick;
+$('#prof').onclick=openProfile;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDD();if($('#modal').innerHTML)closeModal()}});
+
+// Real-time clock interval (updates seconds every second)
+setInterval(() => {
+  const dtInfo = getFormattedDateTime();
+  const subEl = $('.date-badge .dt-sub');
+  if (subEl) {
+    subEl.innerHTML = `<i class="fa-regular fa-clock" style="margin-right:4px"></i>${dtInfo.timeStr}`;
+  }
+}, 1000);
+
+load().then(render);
+</script>
+</body>
+</html>
